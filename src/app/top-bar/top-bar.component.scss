@@ -1,0 +1,24 @@
+.dropdown {
+    position: relative;
+}
+
+.top-bar {
+    background-color: white;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(25,25,25,.1);
+}
+
+.menu-list {
+    display: none;
+    position: absolute;
+    background-color: white;
+    z-index: 1;
+
+    .menu-element {
+        margin-right: 10px;
+    }
+}
+
+.show-menu-list{
+    display: flex;
+}
