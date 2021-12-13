@@ -1,5 +1,6 @@
 .dropdown {
     position: relative;
+    z-index: 100;
 }
 
 .top-bar {
@@ -9,10 +10,11 @@
 }
 
 .menu-list {
-    display: none;
     position: absolute;
-    background-color: white;
-    z-index: 1;
+    z-index: 101;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.4s;
 
     .menu-element {
         margin-right: 10px;
@@ -20,5 +22,5 @@
 }
 
 .show-menu-list{
-    display: flex;
+    height: 175px;
 }

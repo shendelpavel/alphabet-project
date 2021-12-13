@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TopBarComponent } from './top-bar/top-bar.component'
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'alphabet-project';
+  blockPage: boolean = false;
+  onChanged(showMenu: boolean) {
+    this.blockPage = showMenu;
+  }
 }
