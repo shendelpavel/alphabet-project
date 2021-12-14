@@ -3,18 +3,19 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ContactsComponent } from './contacts/contacts.component';
-import { InfoComponent } from './info/info.component';
+import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+
 const routes: Routes = [
-  { path: '', component: InfoComponent },
+  { path: '', component: HomeComponent },
   { path: 'contacts', component: ContactsComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
   declarations: [
-    InfoComponent,
+    HomeComponent,
     ContactsComponent,
     PageNotFoundComponent
   ],
