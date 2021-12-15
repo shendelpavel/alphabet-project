@@ -1,0 +1,76 @@
+$cardHeight: 720px;
+$cardWidth: 1080px;
+
+.container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0px 15px;
+}
+
+.block-text {
+    padding: 129px 0px;
+    border-bottom: 1px solid rgba(25,25,25,.1);
+}
+
+.stage-title, .cards-title {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.25;
+    max-width: 790px;
+    margin: 0 auto 15px;
+    text-align: center;
+}
+
+.stage-description {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    max-width: 327px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.project-cards {
+    padding: 50px 0px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.card {
+    height: $cardHeight;
+    width: $cardWidth;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    color: rgb(255, 250, 242);
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+.card-container {
+    height: $cardHeight + 30px;
+    margin-top: 35px;
+}
+
+.project-1-card {
+    background: -webkit-linear-gradient(315deg, rgb(120, 120, 120) 6%, rgb(208, 208, 208) 100%);
+    background: -moz-linear-gradient(315deg, rgb(120, 120, 120) 6%, rgb(208, 208, 208) 100%);
+    background: linear-gradient(315deg, rgb(120, 120, 120) 6%, rgb(208, 208, 208) 100%);
+}
+
+.project-2-card {
+    background: -webkit-linear-gradient(315deg, rgb(120, 120, 120) 6%, rgb(208, 208, 208) 100%);
+    background: -moz-linear-gradient(315deg, rgb(120, 120, 120) 6%, rgb(208, 208, 208) 100%);
+    background: linear-gradient(315deg, rgb(120, 120, 120) 6%, rgb(208, 208, 208) 100%);
+}
+
+.card:hover {
+    cursor: pointer;
+    height: $cardHeight + 30px;
+    width: $cardWidth + 30px;
+    box-shadow: 0 5px 30px 0 rgba(0,0,0,0.4);
+}

@@ -1,0 +1,26 @@
+.dropdown {
+    position: relative;
+    z-index: 100;
+}
+
+.top-bar {
+    background-color: white;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(25,25,25,.1);
+}
+
+.menu-list {
+    position: absolute;
+    z-index: 101;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.4s;
+
+    .menu-element {
+        margin-right: 10px;
+    }
+}
+
+.show-menu-list{
+    height: 175px;
+}
