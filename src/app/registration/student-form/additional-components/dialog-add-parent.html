@@ -1,0 +1,28 @@
+<form [formGroup]="parentForm">
+  <div mat-dialog-content>
+    <p>Enter parent's email</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Parent's email</mat-label>
+      <input matInput formControlName="email" />
+      <mat-error
+        *ngIf="
+        parentForm.controls['email'].invalid &&
+        parentForm.controls['email'].touched
+  "
+      >
+        Incorrect email. Ex.: email@email.com
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button
+      mat-button
+      [disabled]="parentForm.invalid"
+      [mat-dialog-close]="parentForm.controls['email'].value"
+      cdkFocusInitial
+    >
+      Ok
+    </button>
+  </div>
+</form>

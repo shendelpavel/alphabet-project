@@ -1,0 +1,27 @@
+mat-form-field.mat-form-field {
+  width: 201px;
+}
+
+.buttons-container {
+  margin: 0 auto;
+  width: 201px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-students-container {
+  display: flex;
+}
+
+.add-new-students {
+  width: 200px;
+  box-sizing: border-box;
+  padding: 0 15px;
+}
+
+.add-existing-students {
+  width: 200px;
+  box-sizing: border-box;
+  padding: 0 15px;
+}

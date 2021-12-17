@@ -13,6 +13,8 @@ export class TopBarComponent implements OnInit {
   menuList(): void {
     this.showMenu = !this.showMenu;
     this.onChanged.emit(this.showMenu);
+
+    this.showMenu ? document.querySelector('body')!.style.overflow = 'hidden' : document.querySelector('body')!.style.overflow = 'visible';
   }
 
   constructor() { }

@@ -1,0 +1,60 @@
+.basic-form {
+  width: 720px;
+  display: flex;
+  flex-direction: column;
+  color: #673ab7;
+  border: 7px solid #673ab7;
+  border-radius: 10px;
+  box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.4);
+  padding: 15px;
+}
+
+.form-title {
+  text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(25, 25, 25, 0.1);
+  margin-bottom: 23px;
+  h1 {
+    margin: 0;
+  }
+}
+
+mat-form-field.mat-form-field {
+  width: 90%;
+  font-size: 17px;
+}
+
+.buttons-container {
+  margin: 0 auto;
+  width: 201px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.parent-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 0px;
+  overflow: hidden;
+  transition: height 0.8s;
+  color: #673ab7;
+}
+
+.show-parent-list {
+  height: 36px;
+  padding: 7px 0;
+}
+
+.parent-list-item {
+  display: flex;
+  align-items: center;
+}
+
+.parent-email {
+  padding-right: 14px;
+}
+
+.test {
+  padding-bottom: 0px !important;
+}
