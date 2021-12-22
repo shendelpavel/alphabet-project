@@ -9,6 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   imports: [
@@ -23,6 +25,8 @@ import { MatMenuModule } from '@angular/material/menu';
     ReactiveFormsModule,
     MatDialogModule,
     MatMenuModule,
+    MatStepperModule,
+    MatChipsModule,
   ],
   exports: [
     MatToolbarModule,
@@ -35,6 +39,8 @@ import { MatMenuModule } from '@angular/material/menu';
     ReactiveFormsModule,
     MatDialogModule,
     MatMenuModule,
+    MatStepperModule,
+    MatChipsModule,
   ],
 })
 export class SharedModule {}

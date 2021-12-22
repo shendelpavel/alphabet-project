@@ -1,12 +1,12 @@
 .basic-form {
-  width: 720px;
   display: flex;
   flex-direction: column;
-  color: #673ab7;
-  border: 7px solid #673ab7;
-  border-radius: 10px;
-  box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.4);
+  max-width: 1440px;
   padding: 15px;
+}
+
+.step-content-margin-top {
+  margin-top: 15px;
 }
 
 .form-title {
@@ -19,42 +19,58 @@
   }
 }
 
-mat-form-field.mat-form-field {
-  width: 90%;
+.basic-form ::ng-deep .mat-form-field {
+  width: 210px;
   font-size: 17px;
+  .mat-form-field-flex {
+    background-color: transparent;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 374px) {
+    width: 190px;
+  }
+
+  @media (max-width: 344px) {
+    width: 165px;
+  }
 }
 
-.buttons-container {
-  margin: 0 auto;
-  width: 201px;
-  display: flex;
-  justify-content: space-between;
+.basic-form ::ng-deep .mat-button {
+  @media (max-width: 374px) {
+    font-size: 13px;
+  }
 }
 
 .parent-list {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 0px;
-  overflow: hidden;
-  transition: height 0.8s;
-  color: #673ab7;
+  max-height: 0px;
+  transition: max-height 0.4s;
 }
 
 .show-parent-list {
-  height: 36px;
-  padding: 7px 0;
+  max-height: 160px;
+  width: 720px;
+
+  @media (max-width: 1439px) {
+    width: 265px;
+  }
+
+  @media (max-width: 424px) {
+    width: 205px;
+  }
 }
 
-.parent-list-item {
-  display: flex;
-  align-items: center;
+.done-step-title {
+  @media (max-width: 1439px) {
+    text-align: center;
+  }
 }
 
-.parent-email {
-  padding-right: 14px;
-}
-
-.test {
-  padding-bottom: 0px !important;
+.parent-list-overflow {
+  max-height: 160px;
+  overflow-y: auto;
+  overflow-x: auto;
 }

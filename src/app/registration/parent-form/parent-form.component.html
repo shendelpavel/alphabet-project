@@ -1,4 +1,294 @@
-<h1>Parent registration form</h1>
+<div class="form-container">
+  <div class="basic-form">
+    <div class="form-title">
+      <h1>Parent registration form</h1>
+    </div>
+    <mat-stepper #stepper [orientation]="stepperOrientation">
+      <form [formGroup]="parentForm" novalidate>
+        <mat-step
+          [stepControl]="parentForm.controls['name']"
+          errorMessage="Enter your name."
+        >
+          <ng-template matStepLabel>Fill out your name</ng-template>
+          <div class="step-content-margin-top">
+            <mat-form-field appearance="fill">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="First name" formControlName="name" />
+              <mat-error
+                *ngIf="
+                  parentForm.controls['name'].invalid &&
+                  parentForm.controls['name'].touched
+                "
+              >
+                Enter your name</mat-error
+              >
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperNext type="button">Next</button>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step
+          [stepControl]="parentForm.controls['lastName']"
+          errorMessage="Enter your last name."
+        >
+          <ng-template matStepLabel>Fill out your last name</ng-template>
+          <div class="step-content-margin-top">
+            <mat-form-field appearance="fill">
+              <mat-label>Last name</mat-label>
+              <input
+                matInput
+                placeholder="Last name"
+                formControlName="lastName"
+              />
+              <mat-error
+                *ngIf="
+                  parentForm.controls['lastName'].invalid &&
+                  parentForm.controls['lastName'].touched
+                "
+              >
+                Enter your last name</mat-error
+              >
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious type="button">Back</button>
+              <button mat-button matStepperNext type="button">Next</button>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step
+          [stepControl]="parentForm.controls['email']"
+          errorMessage="Incorrect email."
+        >
+          <ng-template matStepLabel>Fill out your email</ng-template>
+          <div class="step-content-margin-top">
+            <mat-form-field appearance="fill">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="email" formControlName="email" />
+              <mat-error
+                *ngIf="
+                  parentForm.controls['email'].invalid &&
+                  parentForm.controls['email'].touched
+                "
+              >
+                Incorrect email. Ex. email@email.com
+              </mat-error>
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious type="button">Back</button>
+              <button mat-button matStepperNext type="button">Next</button>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step
+          [stepControl]="parentForm.controls['phoneNumber']"
+          errorMessage="Incorrect phone number."
+        >
+          <ng-template matStepLabel>Fill out your phone number</ng-template>
+          <div class="step-content-margin-top">
+            <mat-form-field appearance="fill">
+              <mat-label>Phone number</mat-label>
+              <input
+                matInput
+                placeholder="Phone number"
+                formControlName="phoneNumber"
+              />
+              <mat-error
+                *ngIf="
+                  parentForm.controls['phoneNumber'].invalid &&
+                  parentForm.controls['phoneNumber'].touched
+                "
+              >
+                Incorrect phone number</mat-error
+              >
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious type="button">Back</button>
+              <button mat-button matStepperNext type="button">Next</button>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step
+          [stepControl]="parentForm.controls['confirmPassword']"
+          errorMessage="Confirm password."
+        >
+          <ng-template matStepLabel>Fill out your password</ng-template>
+          <div class="step-content-margin-top">
+            <div>
+              <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input
+                  matInput
+                  placeholder="Password"
+                  [type]="hidePassword ? 'password' : 'text'"
+                  formControlName="password"
+                />
+                <mat-error
+                  *ngIf="
+                    parentForm.controls['password'].invalid &&
+                    parentForm.controls['password'].touched
+                  "
+                >
+                  Incorrect password</mat-error
+                >
+              </mat-form-field>
+              <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                (click)="hidePassword = !hidePassword"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hidePassword"
+              >
+                <mat-icon>{{
+                  hidePassword ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+            </div>
+            <div>
+              <mat-form-field appearance="fill">
+                <mat-label>Confirm password</mat-label>
+                <input
+                  matInput
+                  placeholder="Password"
+                  name="test"
+                  [type]="hideConfirmPassword ? 'password' : 'text'"
+                  formControlName="confirmPassword"
+                  (ngModelChange)="checkPassword()"
+                />
+                <mat-error
+                  *ngIf="
+                    parentForm.controls['confirmPassword'].hasError(
+                      'notConfirmed'
+                    ) && parentForm.controls['confirmPassword'].touched
+                  "
+                >
+                  Password mismatch</mat-error
+                >
+              </mat-form-field>
+              <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                (click)="hideConfirmPassword = !hideConfirmPassword"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hideConfirmPassword"
+              >
+                <mat-icon>{{
+                  hideConfirmPassword ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+            </div>
+            <div>
+              <button mat-button matStepperPrevious type="button">Back</button>
+              <button mat-button matStepperNext type="button">Next</button>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Add students</ng-template>
+          <div class="step-content-margin-top">
+            <h2>You can add students</h2>
+            <div class="new-students">
+              <div
+                class="student-list"
+                [class.show-student-list]="arrayOfNewStudents.length > 0"
+              >
+                <mat-chip-list aria-label="added students">
+                  <div class="student-list-overflow">
+                    <mat-chip
+                      *ngFor="
+                        let student of arrayOfNewStudents.controls;
+                        let i = index
+                      "
+                      (removed)="deleteNewStudent(i)"
+                    >
+                      {{ student.value["email"] }}
+                      <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                      </button>
+                    </mat-chip>
+                  </div>
+                </mat-chip-list>
+              </div>
+              <div>
+                <button mat-button type="button" (click)="addNewStudent()">
+                  Add new student
+                </button>
+              </div>
+            </div>
+            <div class="existing-students">
+              <div
+                class="student-list"
+                [class.show-student-list]="arrayOfExistingStudents.length > 0"
+              >
+                <mat-chip-list aria-label="added students">
+                  <div class="student-list-overflow">
+                    <mat-chip
+                      *ngFor="
+                        let student of arrayOfExistingStudents.controls;
+                        let i = index
+                      "
+                      (removed)="deleteExistingStudent(i)"
+                    >
+                      {{ student.value["email"] }}
+                      <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                      </button>
+                    </mat-chip>
+                  </div>
+                </mat-chip-list>
+              </div>
+              <div>
+                <button mat-button type="button" (click)="addExistingStudent()">
+                  Add existing student
+                </button>
+              </div>
+            </div>
+            <div>
+              <button mat-button matStepperPrevious type="button">Back</button>
+              <button mat-button matStepperNext type="button">Next</button>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <div class="step-content-margin-top">
+            <div class="done-step-title">
+              <h2>
+                {{
+                  parentForm.invalid
+                    ? "Please fill in all required fields"
+                    : "You are now done."
+                }}
+              </h2>
+            </div>
+            <div></div>
+            <div>
+              <button mat-button matStepperPrevious type="button">Back</button>
+              <button
+                mat-button
+                type="button"
+                (click)="stepper.reset(); clearStudents()"
+              >
+                Reset
+              </button>
+              <button
+                mat-button
+                [disabled]="parentForm.invalid"
+                (click)="signUp()"
+              >
+                Sign Up
+              </button>
+            </div>
+          </div>
+        </mat-step>
+      </form>
+    </mat-stepper>
+  </div>
+</div>
+
+<!-- <h1>Parent registration form</h1>
 <form [formGroup]="parentForm" novalidate>
   <mat-form-field appearance="fill">
     <mat-label>Your name</mat-label>
@@ -193,4 +483,4 @@
       </button>
     </div>
   </div>
-</form>
+</form> -->

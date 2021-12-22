@@ -1,14 +1,14 @@
-<form [formGroup]="parentForm">
+<form [formGroup]="existingStudentForm">
   <div mat-dialog-content>
-    <p>Enter parent's email</p>
+    <p>Enter student's email</p>
     <mat-form-field appearance="fill">
-      <mat-label>Parent's email</mat-label>
+      <mat-label>Student's email</mat-label>
       <input matInput formControlName="email" />
       <mat-error
         *ngIf="
-        parentForm.controls['email'].invalid &&
-        parentForm.controls['email'].touched
-  "
+          existingStudentForm.controls['email'].invalid &&
+          existingStudentForm.controls['email'].touched
+    "
       >
         Incorrect email. Ex.: email@email.com
       </mat-error>
@@ -18,11 +18,11 @@
     <button mat-button (click)="onNoClick()">Cancel</button>
     <button
       mat-button
-      [disabled]="parentForm.invalid"
-      [mat-dialog-close]="parentForm"
+      [disabled]="existingStudentForm.invalid"
+      [mat-dialog-close]="existingStudentForm"
       cdkFocusInitial
     >
-      Add parent
+      Add student
     </button>
   </div>
 </form>
