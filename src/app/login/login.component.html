@@ -1,0 +1,67 @@
+<mat-stepper #stepper>
+  <form [formGroup]="loginForm" novalidate>
+    <mat-step
+      [stepControl]="loginForm.controls['email']"
+      errorMessage="Incorrect email or password"
+    >
+      <ng-template matStepLabel>Fill out your email</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder="pat@example.com" formControlName="email" />
+        <mat-error *ngIf="loginForm.controls['email'].invalid"
+          >Incorrect email or password</mat-error
+        >
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext type="button">Next</button>
+      </div>
+    </mat-step>
+    <mat-step
+      [stepControl]="loginForm.controls['password']"
+      [optional]="!hasPassword"
+    >
+      <ng-template matStepLabel>Fill out your password</ng-template>
+      <div>
+        <mat-slide-toggle color="warn" checked="true" (click)="test()">
+          Do you have password?
+        </mat-slide-toggle>
+      </div>
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          placeholder="Password"
+          [type]="hidePassword ? 'password' : 'text'"
+          formControlName="password"
+        />
+      </mat-form-field>
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidePassword"
+      >
+        <mat-icon>{{
+          hidePassword ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+      <div>
+        <button mat-button matStepperPrevious type="button">Back</button>
+        <button mat-button matStepperNext type="button">Next</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Log In</ng-template>
+      <div>
+        <button mat-button matStepperPrevious type="button">Back</button>
+        <button mat-button type="button" (click)="stepper.reset()">
+          Reset
+        </button>
+        <button mat-button (click)="logIn()">Log In</button>
+        <button mat-button routerLink="/registration">Registration</button>
+      </div>
+    </mat-step>
+  </form>
+</mat-stepper>

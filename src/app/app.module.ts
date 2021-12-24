@@ -8,6 +8,8 @@ import { SharedModule } from './shared/shared.module';
 import { ComponentsModule } from './components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationModule } from './registration/registration.module';
+import { DataService } from './data.service';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,8 +22,9 @@ import { RegistrationModule } from './registration/registration.module';
     FormsModule,
     ReactiveFormsModule,
     RegistrationModule,
+    LoginModule,
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

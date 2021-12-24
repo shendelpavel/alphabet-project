@@ -11,6 +11,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
@@ -27,6 +29,8 @@ import { MatChipsModule } from '@angular/material/chips';
     MatMenuModule,
     MatStepperModule,
     MatChipsModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
   ],
   exports: [
     MatToolbarModule,
@@ -41,6 +45,8 @@ import { MatChipsModule } from '@angular/material/chips';
     MatMenuModule,
     MatStepperModule,
     MatChipsModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
   ],
 })
 export class SharedModule {}

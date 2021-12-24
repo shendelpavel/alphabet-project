@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { PasswordConfirmValidator } from '../utils/password-confirm.validator';
+import { PasswordConfirmValidator } from '../../utils/password-confirm.validator';
 
 @Component({
   selector: 'app-student-form',
@@ -32,6 +32,8 @@ export class StudentFormComponent implements OnInit {
   constructor(public dialog: MatDialog, private formBuilder: FormBuilder) {
     this.studentForm = this.formBuilder.group(
       {
+        role: ['student'],
+        isLoggedIn: [false],
         name: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
@@ -68,12 +70,6 @@ export class StudentFormComponent implements OnInit {
 
   get arrayOfParents(): FormArray {
     return this.studentForm.get('addedParents') as FormArray;
-  }
-
-  checkPassword() {
-    if (this.studentForm.controls['confirmPassword'].hasError('notConfirmed'))
-      this.studentForm.setErrors([{ notConfirmed: true }]);
-    else this.studentForm.controls['confirmPassword'].setErrors(null);
   }
 
   addParent(): void {

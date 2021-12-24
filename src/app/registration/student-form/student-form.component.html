@@ -151,10 +151,8 @@
                 <input
                   matInput
                   placeholder="Password"
-                  name="test"
                   [type]="hideConfirmPassword ? 'password' : 'text'"
                   formControlName="confirmPassword"
-                  (ngModelChange)="checkPassword()"
                 />
                 <mat-error
                   *ngIf="
