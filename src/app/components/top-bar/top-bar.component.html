@@ -1,34 +1,34 @@
 <div class="dropdown">
-    <mat-toolbar class="top-bar">
-        <div>
-            <button mat-icon-button (click)="menuList()">
-                <mat-icon>menu</mat-icon>
-            </button>
-        </div>
-        <div>
-            <button mat-flat-button routerLink="/">
-                <h1>My App</h1>
-            </button>
-        </div>
-        <div>
-            <button mat-icon-button routerLink="/contacts">
-                <mat-icon>contact_page</mat-icon>
-            </button>
-        </div>
-    </mat-toolbar>
-
+  <mat-toolbar class="top-bar">
     <div>
-        <mat-toolbar class="menu-list" [class.show-menu-list]="showMenu">
-            <div class="menu-element">
-                <button mat-flat-button>
-                    <span>Page 1</span>
-                </button>
-            </div>
-            <div class="menu-element">
-                <button mat-flat-button>
-                    <span>Page 2</span>
-                </button>
-            </div>
-        </mat-toolbar>
+      <button mat-icon-button (click)="showMenu()">
+        <mat-icon>menu</mat-icon>
+      </button>
     </div>
+    <div>
+      <button mat-flat-button routerLink="/">
+        <h1>My App</h1>
+      </button>
+    </div>
+    <div>
+      <button mat-icon-button routerLink="/contacts">
+        <mat-icon>contact_page</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <div>
+    <mat-toolbar class="menu-list" [class.show-menu-list]="isMenuShown">
+      <div class="menu-element">
+        <button mat-flat-button>
+          <span>Page 1</span>
+        </button>
+      </div>
+      <div class="menu-element">
+        <button mat-flat-button>
+          <span>Page 2</span>
+        </button>
+      </div>
+    </mat-toolbar>
+  </div>
 </div>

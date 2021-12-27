@@ -3,14 +3,17 @@
     <p>Enter parent's email</p>
     <mat-form-field appearance="fill">
       <mat-label>Parent's email</mat-label>
-      <input matInput formControlName="email" />
+      <input
+        matInput
+        placeholder="Ex. email@email.com"
+        formControlName="email"
+      />
       <mat-error
         *ngIf="
-        parentForm.controls['email'].invalid &&
-        parentForm.controls['email'].touched
+        checkControlErrors('email')
   "
       >
-        Incorrect email. Ex.: email@email.com
+        Incorrect email or parent doesn't exist
       </mat-error>
     </mat-form-field>
   </div>

@@ -14,12 +14,7 @@
             <mat-form-field appearance="fill">
               <mat-label>Name</mat-label>
               <input matInput placeholder="First name" formControlName="name" />
-              <mat-error
-                *ngIf="
-                  parentForm.controls['name'].invalid &&
-                  parentForm.controls['name'].touched
-                "
-              >
+              <mat-error *ngIf="checkControlErrors('name')">
                 Enter your name</mat-error
               >
             </mat-form-field>
@@ -41,12 +36,7 @@
                 placeholder="Last name"
                 formControlName="lastName"
               />
-              <mat-error
-                *ngIf="
-                  parentForm.controls['lastName'].invalid &&
-                  parentForm.controls['lastName'].touched
-                "
-              >
+              <mat-error *ngIf="checkControlErrors('lastName')">
                 Enter your last name</mat-error
               >
             </mat-form-field>
@@ -64,14 +54,13 @@
           <div class="step-content-margin-top">
             <mat-form-field appearance="fill">
               <mat-label>Email</mat-label>
-              <input matInput placeholder="email" formControlName="email" />
-              <mat-error
-                *ngIf="
-                  parentForm.controls['email'].invalid &&
-                  parentForm.controls['email'].touched
-                "
-              >
-                Incorrect email. Ex. email@email.com
+              <input
+                matInput
+                placeholder="Ex. email@email.com"
+                formControlName="email"
+              />
+              <mat-error *ngIf="checkControlErrors('email')">
+                Incorrect email or this email's already in use
               </mat-error>
             </mat-form-field>
             <div>
@@ -93,12 +82,7 @@
                 placeholder="Phone number"
                 formControlName="phoneNumber"
               />
-              <mat-error
-                *ngIf="
-                  parentForm.controls['phoneNumber'].invalid &&
-                  parentForm.controls['phoneNumber'].touched
-                "
-              >
+              <mat-error *ngIf="checkControlErrors('phoneNumber')">
                 Incorrect phone number</mat-error
               >
             </mat-form-field>
@@ -123,12 +107,7 @@
                   [type]="hidePassword ? 'password' : 'text'"
                   formControlName="password"
                 />
-                <mat-error
-                  *ngIf="
-                    parentForm.controls['password'].invalid &&
-                    parentForm.controls['password'].touched
-                  "
-                >
+                <mat-error *ngIf="checkControlErrors('password')">
                   Incorrect password</mat-error
                 >
               </mat-form-field>
@@ -154,15 +133,8 @@
                   name="test"
                   [type]="hideConfirmPassword ? 'password' : 'text'"
                   formControlName="confirmPassword"
-                  (ngModelChange)="checkPassword()"
                 />
-                <mat-error
-                  *ngIf="
-                    parentForm.controls['confirmPassword'].hasError(
-                      'notConfirmed'
-                    ) && parentForm.controls['confirmPassword'].touched
-                  "
-                >
+                <mat-error *ngIf="checkControlErrors('confirmPassword')">
                   Password mismatch</mat-error
                 >
               </mat-form-field>
@@ -201,6 +173,7 @@
                         let student of arrayOfNewStudents.controls;
                         let i = index
                       "
+                      (click)="editNewStudent(i)"
                       (removed)="deleteNewStudent(i)"
                     >
                       {{ student.value["email"] }}
@@ -229,6 +202,7 @@
                         let student of arrayOfExistingStudents.controls;
                         let i = index
                       "
+                      (click)="editExistingStudent(i)"
                       (removed)="deleteExistingStudent(i)"
                     >
                       {{ student.value["email"] }}
@@ -269,7 +243,7 @@
               <button
                 mat-button
                 type="button"
-                (click)="stepper.reset(); clearStudents()"
+                (click)="stepper.reset(); resetForm()"
               >
                 Reset
               </button>
@@ -287,200 +261,3 @@
     </mat-stepper>
   </div>
 </div>
-
-<!-- <h1>Parent registration form</h1>
-<form [formGroup]="parentForm" novalidate>
-  <mat-form-field appearance="fill">
-    <mat-label>Your name</mat-label>
-    <input matInput formControlName="name" />
-    <mat-error
-      *ngIf="
-        parentForm.controls['name'].invalid &&
-        parentForm.controls['name'].touched
-      "
-    >
-      Enter your name</mat-error
-    >
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Your last name</mat-label>
-    <input matInput formControlName="lastName" />
-    <mat-error
-      *ngIf="
-        parentForm.controls['lastName'].invalid &&
-        parentForm.controls['lastName'].touched
-      "
-    >
-      Enter your last name</mat-error
-    >
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Your email</mat-label>
-    <input matInput formControlName="email" />
-    <mat-error
-      *ngIf="
-        parentForm.controls['email'].invalid &&
-        parentForm.controls['email'].touched
-      "
-    >
-      Incorrect email. Ex.: email@email.com
-    </mat-error>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Your phone number</mat-label>
-    <input matInput formControlName="phoneNumber" />
-    <mat-error
-      *ngIf="
-        parentForm.controls['phoneNumber'].invalid &&
-        parentForm.controls['phoneNumber'].touched
-      "
-    >
-      Incorrect phone number</mat-error
-    >
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Your password</mat-label>
-    <input
-      matInput
-      [type]="hidePassword ? 'password' : 'text'"
-      formControlName="password"
-    />
-    <button
-      mat-icon-button
-      matSuffix
-      type="button"
-      (click)="hidePassword = !hidePassword"
-      [attr.aria-label]="'Hide password'"
-      [attr.aria-pressed]="hidePassword"
-    >
-      <mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
-    </button>
-    <mat-error
-      *ngIf="
-        parentForm.controls['password'].invalid &&
-        parentForm.controls['password'].touched
-      "
-    >
-      Incorrect password</mat-error
-    >
-  </mat-form-field>
-  <div class="add-students-container" *ngIf="addStudents">
-    <div class="add-new-students">
-      <h3>Add new students</h3>
-      <button mat-icon-button type="button" (click)="addNewStudent()">
-        <mat-icon>add</mat-icon>
-      </button>
-      <button mat-icon-button type="button" (click)="deleteNewStudent()">
-        <mat-icon>remove</mat-icon>
-      </button>
-      <div
-        formArrayName="addedNewStudents"
-        *ngFor="let newStudent of arrayOfNewStudents.controls; let i = index"
-      >
-        <div [formGroupName]="i">
-          <mat-form-field appearance="fill">
-            <mat-label>Student's name</mat-label>
-            <input matInput formControlName="name" />
-            <mat-error
-              *ngIf="
-                arrayOfNewStudents.controls[i].get('name')!.invalid &&
-                arrayOfNewStudents.controls[i].get('name')!.touched
-              "
-            >
-              Enter student name</mat-error
-            >
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Student's last name</mat-label>
-            <input matInput formControlName="lastName" />
-            <mat-error
-              *ngIf="
-                arrayOfNewStudents.controls[i].get('lastName')!.invalid &&
-                arrayOfNewStudents.controls[i].get('lastName')!.touched
-              "
-            >
-              Enter student last name</mat-error
-            >
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Student's email</mat-label>
-            <input matInput formControlName="email" />
-            <mat-error
-              *ngIf="
-                arrayOfNewStudents.controls[i].get('email')!.invalid &&
-                arrayOfNewStudents.controls[i].get('email')!.touched
-              "
-            >
-              Incorrect email. Ex.: email@email.com
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Student's phone number</mat-label>
-            <input matInput formControlName="phoneNumber" />
-            <mat-error
-              *ngIf="
-                arrayOfNewStudents.controls[i].get('phoneNumber')!.invalid &&
-                arrayOfNewStudents.controls[i].get('phoneNumber')!.touched
-              "
-            >
-              Incorrect phone number</mat-error
-            >
-          </mat-form-field>
-        </div>
-      </div>
-    </div>
-    <div class="add-existing-students">
-      <h3>Add existing students</h3>
-      <button mat-icon-button type="button" (click)="addExistingStudent()">
-        <mat-icon>add</mat-icon>
-      </button>
-      <button mat-icon-button type="button" (click)="deleteExistingStudent()">
-        <mat-icon>remove</mat-icon>
-      </button>
-      <div
-        formArrayName="addedExistingStudents"
-        *ngFor="
-          let existingStudent of arrayOfExistingStudents.controls;
-          let i = index
-        "
-      >
-        <div [formGroupName]="i">
-          <mat-form-field appearance="fill">
-            <mat-label>Student's email</mat-label>
-            <input matInput formControlName="email" />
-            <mat-error
-              *ngIf="
-                arrayOfExistingStudents.controls[i].get('email')!.invalid &&
-                arrayOfExistingStudents.controls[i].get('email')!.touched
-              "
-            >
-              Incorrect email. Ex.: email@email.com
-            </mat-error>
-          </mat-form-field>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="buttons-container">
-    <div>
-      <button
-        mat-raised-button
-        color="primary"
-        type="button"
-        (click)="addStudents = !addStudents; clearStudents()"
-      >
-        {{ addStudents ? "Don't add" : "Add students" }}
-      </button>
-    </div>
-    <div>
-      <button
-        mat-raised-button
-        color="primary"
-        [disabled]="parentForm.invalid"
-        (click)="signUp()"
-      >
-        Sign Up
-      </button>
-    </div>
-  </div>
-</form> -->
