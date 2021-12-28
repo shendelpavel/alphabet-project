@@ -1,28 +1,36 @@
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { DataService } from '../data.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { PasswordConfirmValidator } from '../utils/password-confirm.validator';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import { DialogSetPassword } from './components/set-password.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  providers: [
-    {
-      provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: { showError: true },
-    },
-  ],
 })
-export class LoginComponent implements OnInit {
-  hidePassword = true;
+export class LoginComponent {
+  hasPassword: boolean = true;
+  hidePassword: boolean = true;
+
+  snackBarMessage: string = 'You must to create password!!!';
+  snackBarClose: string = 'Ok';
+  snackBarHorizontal: MatSnackBarHorizontalPosition = 'center';
+  snackBarVertical: MatSnackBarVerticalPosition = 'top';
+
+  showErrorMessage: boolean = false;
 
   loginForm!: FormGroup;
-
-  hasPassword: boolean = true;
 
   constructor(
     private _snackBar: MatSnackBar,
@@ -32,59 +40,73 @@ export class LoginComponent implements OnInit {
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required]],
-
       password: ['', [Validators.required]],
     });
   }
 
-  test() {
+  disablePasswordField() {
     this.hasPassword = !this.hasPassword;
     this.hasPassword
       ? this.loginForm.get('password')!.enable()
       : this.loginForm.get('password')!.disable();
   }
 
-  ngOnInit(): void {}
-
   logIn() {
-    if (this.checkLogin()) {
-      this.loginForm.controls['email'].setErrors(null);
-      this.loginForm.controls['password'].setErrors(null);
-      console.log("You're logedIn!!!!");
+    const email = this.loginForm.value.email;
+    const password = this.loginForm.value.password;
+    const jsonUserData = this.checkEmail(email);
+    if (jsonUserData) {
+      const userData = JSON.parse(jsonUserData);
+      userData.password || this.hasPassword
+        ? this.checkPassword(password, userData.password, userData)
+        : this.setPassword(userData);
     } else {
-      this.loginForm.controls['email'].setErrors([{ loginNotConfirm: true }]);
-      this.loginForm.controls['password'].setErrors([
-        { loginNotConfirm: true },
-      ]);
+      this.forbidLogIn();
     }
   }
 
-  checkLogin() {
-    const email = this.loginForm.value.email;
-    const password = this.loginForm.value.password;
+  checkEmail(email: string) {
     let jsonUserData = localStorage.getItem(email);
-    if (jsonUserData) {
-      let userData = JSON.parse(jsonUserData);
-      if (!userData.password) {
-        if (this.setPassword(userData)) {
-          this.setStatus(userData);
-          return true;
-        } else {
-          this._snackBar.open('You must to create password!!!', 'Ok');
-          return false;
-        }
+    return jsonUserData;
+  }
+
+  checkPassword(password: string, dataPassword: string, userData: any) {
+    password === dataPassword ? this.allowLogIn(userData) : this.forbidLogIn();
+  }
+
+  setPassword(userData: any) {
+    const dialogRef = this.dialog.open(DialogSetPassword);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        userData.password = result.value.password;
+        const jsonUserData = JSON.stringify(userData);
+        localStorage.setItem(userData.email, jsonUserData);
+        this.allowLogIn(userData);
+      } else {
+        this._snackBar.open(this.snackBarMessage, this.snackBarClose, {
+          horizontalPosition: this.snackBarHorizontal,
+          verticalPosition: this.snackBarVertical,
+        });
       }
-      if (password === userData.password) {
-        this.setStatus(userData);
-        return true;
-      }
-    }
-    return false;
+    });
+  }
+
+  forbidLogIn() {
+    this.loginForm.controls['email'].setErrors([{ loginNotConfirm: true }]);
+    this.loginForm.controls['password'].setErrors([{ loginNotConfirm: true }]);
+    this.showErrorMessage = true;
+  }
+
+  allowLogIn(userData: any) {
+    this.loginForm.controls['email'].setErrors(null);
+    this.loginForm.controls['password'].setErrors(null);
+    this.showErrorMessage = false;
+    this.setStatus(userData);
+    this.setSessionData(userData);
   }
 
   setStatus(userData: any) {
     userData.isLoggedIn = true;
-    this.setSessionData(userData);
     const jsonUserData = JSON.stringify(userData);
     localStorage.setItem(userData.email, jsonUserData);
   }
@@ -93,48 +115,5 @@ export class LoginComponent implements OnInit {
     this.dataService.setStatus(userData.isLoggedIn);
     this.dataService.setRole(userData.role);
     this.dataService.setEmail(userData.email);
-  }
-
-  setPassword(userData: any): boolean {
-    const dialogRef = this.dialog.open(DialogSetPassword);
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result.value.password) {
-        userData.password = result.value.password;
-        userData.confirmPassword = result.value.confirmPassword;
-        const jsonUserData = JSON.stringify(userData);
-        localStorage.setItem(userData.email, jsonUserData);
-        return true;
-      }
-      return false;
-    });
-    return false;
-  }
-}
-
-@Component({
-  selector: 'dialog-set-password',
-  templateUrl: './additional-components/dialog-set-password.html',
-})
-export class DialogSetPassword {
-  hidePassword = true;
-  hideConfirmPassword = true;
-
-  setPasswordForm!: FormGroup;
-
-  constructor(
-    public dialogRef: MatDialogRef<DialogSetPassword>,
-    private formBuilder: FormBuilder
-  ) {
-    this.setPasswordForm = this.formBuilder.group(
-      {
-        password: ['', [Validators.required]],
-        confirmPassword: ['', [Validators.required]],
-      },
-      { validator: PasswordConfirmValidator('password', 'confirmPassword') }
-    );
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 }

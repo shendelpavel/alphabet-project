@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { PasswordConfirmValidator } from '../../utils/password-confirm.validator';
+import { PasswordConfirmValidator } from '../../validators/password-confirm.validator';
 
 @Component({
   selector: 'app-parent-form',

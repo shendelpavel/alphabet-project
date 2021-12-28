@@ -1,6 +1,6 @@
 <div class="dropdown">
   <mat-toolbar class="top-bar">
-    <div>
+    <div class="buttons-container">
       <button mat-icon-button (click)="menuList()">
         <mat-icon>menu</mat-icon>
       </button>
@@ -10,7 +10,7 @@
         <h1>My App</h1>
       </button>
     </div>
-    <div>
+    <div class="buttons-container">
       <button mat-icon-button *ngIf="!isLoggedIn" routerLink="/login">
         <mat-icon>login</mat-icon>
       </button>

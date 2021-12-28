@@ -1,67 +1,87 @@
-<mat-stepper #stepper>
+<div class="form">
+  <div class="form-title"><h1>Login</h1></div>
+  <div class="error-mesage" [class.show-error-message]="showErrorMessage">
+    <div>
+      <b>Failed to sign in.</b><br />Please make sure that you've entered your
+      <b>email</b> and <b>password</b> correctly.
+      <ul>
+        <li>
+          <span>Is <b>Caps Lock</b> on?</span>
+        </li>
+        <li>
+          <span
+            >Maybe you don't have a <b>password</b>? Try to switch slide toggle
+            to the left.</span
+          >
+        </li>
+        <li>
+          <span
+            >Try typing your password in a text editor and then
+            <b>copying and pasting</b> it into the "Password" field.</span
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
   <form [formGroup]="loginForm" novalidate>
-    <mat-step
-      [stepControl]="loginForm.controls['email']"
-      errorMessage="Incorrect email or password"
-    >
-      <ng-template matStepLabel>Fill out your email</ng-template>
-      <mat-form-field appearance="fill">
-        <mat-label>Enter your email</mat-label>
-        <input matInput placeholder="pat@example.com" formControlName="email" />
-        <mat-error *ngIf="loginForm.controls['email'].invalid"
-          >Incorrect email or password</mat-error
-        >
-      </mat-form-field>
+    <div class="form-container">
       <div>
-        <button mat-button matStepperNext type="button">Next</button>
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your email</mat-label>
+          <input
+            matInput
+            placeholder="pat@example.com"
+            formControlName="email"
+          />
+        </mat-form-field>
       </div>
-    </mat-step>
-    <mat-step
-      [stepControl]="loginForm.controls['password']"
-      [optional]="!hasPassword"
-    >
-      <ng-template matStepLabel>Fill out your password</ng-template>
       <div>
-        <mat-slide-toggle color="warn" checked="true" (click)="test()">
-          Do you have password?
-        </mat-slide-toggle>
+        <div>
+          <mat-slide-toggle
+            color="warn"
+            checked="true"
+            (click)="disablePasswordField()"
+          >
+            Do you have a password?
+          </mat-slide-toggle>
+        </div>
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              placeholder="Password"
+              [type]="hidePassword ? 'password' : 'text'"
+              formControlName="password"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              [disabled]="!hasPassword"
+              type="button"
+              (click)="hidePassword = !hidePassword"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword"
+            >
+              <mat-icon>{{
+                hidePassword ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
       </div>
-      <mat-form-field appearance="fill">
-        <mat-label>Password</mat-label>
-        <input
-          matInput
-          placeholder="Password"
-          [type]="hidePassword ? 'password' : 'text'"
-          formControlName="password"
-        />
-      </mat-form-field>
-      <button
-        mat-icon-button
-        matSuffix
-        type="button"
-        (click)="hidePassword = !hidePassword"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hidePassword"
-      >
-        <mat-icon>{{
-          hidePassword ? "visibility_off" : "visibility"
-        }}</mat-icon>
-      </button>
-      <div>
-        <button mat-button matStepperPrevious type="button">Back</button>
-        <button mat-button matStepperNext type="button">Next</button>
+      <div class="form-buttons">
+        <div>
+          <button mat-raised-button color="warn" (click)="logIn()">
+            Log In
+          </button>
+        </div>
+        <div>
+          <button mat-raised-button color="primary" routerLink="/registration">
+            Registration
+          </button>
+        </div>
       </div>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Log In</ng-template>
-      <div>
-        <button mat-button matStepperPrevious type="button">Back</button>
-        <button mat-button type="button" (click)="stepper.reset()">
-          Reset
-        </button>
-        <button mat-button (click)="logIn()">Log In</button>
-        <button mat-button routerLink="/registration">Registration</button>
-      </div>
-    </mat-step>
+    </div>
   </form>
-</mat-stepper>
+</div>
