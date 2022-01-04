@@ -8,11 +8,7 @@
         placeholder="Ex. email@email.com"
         formControlName="email"
       />
-      <mat-error
-        *ngIf="
-        checkControlErrors('email')
-    "
-      >
+      <mat-error *ngIf="checkControlErrors('email')">
         Incorrect email or student doesn't exist
       </mat-error>
     </mat-form-field>

@@ -11,13 +11,9 @@
           <mat-form-field appearance="fill">
             <mat-label>Name</mat-label>
             <input matInput placeholder="First name" formControlName="name" />
-            <mat-error
-              *ngIf="
-              checkControlErrors('name')
-                "
-            >
-              Enter student's name</mat-error
-            >
+            <mat-error *ngIf="checkControlErrors('name')">
+              Enter student's name
+            </mat-error>
           </mat-form-field>
           <div>
             <button mat-button matStepperNext type="button">Next</button>
@@ -37,13 +33,9 @@
               placeholder="Last name"
               formControlName="lastName"
             />
-            <mat-error
-              *ngIf="
-              checkControlErrors('lastName')
-                "
-            >
-              Enter student's last name</mat-error
-            >
+            <mat-error *ngIf="checkControlErrors('lastName')">
+              Enter student's last name
+            </mat-error>
           </mat-form-field>
           <div>
             <button mat-button matStepperPrevious type="button">Back</button>
@@ -64,11 +56,7 @@
               placeholder="Ex. email@email.com"
               formControlName="email"
             />
-            <mat-error
-              *ngIf="
-              checkControlErrors('email')
-                "
-            >
+            <mat-error *ngIf="checkControlErrors('email')">
               Incorrect email or this email's already in use
             </mat-error>
           </mat-form-field>
@@ -91,13 +79,9 @@
               placeholder="Phone number"
               formControlName="phoneNumber"
             />
-            <mat-error
-              *ngIf="
-              checkControlErrors('phoneNumber')
-                "
-            >
-              Incorrect phone number</mat-error
-            >
+            <mat-error *ngIf="checkControlErrors('phoneNumber')">
+              Incorrect phone number
+            </mat-error>
           </mat-form-field>
           <div>
             <button mat-button matStepperPrevious type="button">Back</button>

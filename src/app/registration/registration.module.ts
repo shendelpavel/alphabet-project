@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { RegistrationComponent } from './registration.component';
 import { ParentFormComponent } from './parent-form/parent-form.component';
-import { DialogAddNewStudent } from './parent-form/components/add-new-student.component';
-import { DialogAddExistingStudent } from './parent-form/components/add-existing-student.component';
+import { DialogAddNewStudent } from './parent-form/dialogs/add-new-student/add-new-student.component';
+import { DialogAddExistingStudent } from './parent-form/dialogs/add-existing-student/add-existing-student.component';
 import { StudentFormComponent } from './student-form/student-form.component';
-import { DialogAddParent } from './student-form/components/add-parent.component';
+import { DialogAddParent } from './student-form/dialogs/add-parent/add-parent.component';
 
 @NgModule({
   declarations: [

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-top-bar',
@@ -6,15 +6,13 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./top-bar.component.scss'],
 })
 export class TopBarComponent {
-  isMenuShown: boolean = false;
+  public isMenuShown: boolean = false;
 
-  @Output() blockPage = new EventEmitter<boolean>();
-
-  showMenu(): void {
+  public showMenu(): void {
     this.isMenuShown = !this.isMenuShown;
-    this.blockPage.emit(this.isMenuShown);
-    this.isMenuShown
-      ? document.querySelector('body')!.classList.add('open-menu')
-      : document.querySelector('body')!.classList.remove('open-menu');
+  }
+
+  public hideMenu(): void {
+    this.isMenuShown = false;
   }
 }

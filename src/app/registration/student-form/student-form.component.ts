@@ -1,3 +1,4 @@
+import { StepperOrientation } from '@angular/cdk/stepper';
 import { Component, OnInit, HostListener } from '@angular/core';
 import {
   FormGroup,
@@ -7,9 +8,10 @@ import {
   FormControl,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { DataService } from 'src/app/services/data.service';
 import { EmailInUseValidator } from '../validators/email-in-use.validator';
 import { PasswordConfirmValidator } from '../validators/password-confirm.validator';
-import { DialogAddParent } from './components/add-parent.component';
+import { DialogAddParent } from './dialogs/add-parent/add-parent.component';
 
 @Component({
   selector: 'app-student-form',
@@ -17,31 +19,35 @@ import { DialogAddParent } from './components/add-parent.component';
   styleUrls: ['./student-form.component.scss'],
 })
 export class StudentFormComponent implements OnInit {
-  minHorizontalStepperScreen: number = 1440;
-  verticalStepper: string = 'vertical';
-  horizontalStepper: string = 'horizontal';
-  stepperOrientation: any = this.horizontalStepper;
-  screenWidth: any;
+  readonly MIN_HORIZONTAL_STEPPER_SCREEN: number = 1440;
+  readonly EMAIL_PATTERN_REGEX =
+    /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  readonly PHONE_PATTERN_REGEX = /^\+?([0-9]{10,13})$/;
 
-  hidePassword = true;
-  hideConfirmPassword = true;
+  private screenWidth: number = 0;
+  private addedParents!: FormArray;
 
-  phoneRegx = /^\+?([0-9]{10,13})$/;
-  emailRegx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  public stepperOrientation: StepperOrientation = 'horizontal';
+  public hidePassword = true;
+  public hideConfirmPassword = true;
+  public studentForm!: FormGroup;
 
-  studentForm!: FormGroup;
-
-  addedParents!: FormArray;
-
-  constructor(public dialog: MatDialog, private formBuilder: FormBuilder) {
+  constructor(
+    private dataService: DataService,
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog
+  ) {
     this.studentForm = this.formBuilder.group(
       {
         name: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
-        email: ['', [Validators.required, Validators.pattern(this.emailRegx)]],
+        email: [
+          '',
+          [Validators.required, Validators.pattern(this.EMAIL_PATTERN_REGEX)],
+        ],
         phoneNumber: [
           '',
-          [Validators.required, Validators.pattern(this.phoneRegx)],
+          [Validators.required, Validators.pattern(this.PHONE_PATTERN_REGEX)],
         ],
         password: ['', [Validators.required]],
         confirmPassword: ['', [Validators.required]],
@@ -62,29 +68,29 @@ export class StudentFormComponent implements OnInit {
   }
 
   @HostListener('window:resize', ['$event'])
-  onWindowResize() {
+  private onWindowResize(): void {
     this.screenWidth = window.innerWidth;
     this.setStepperOrientation();
   }
 
-  setStepperOrientation(): any {
-    if (this.screenWidth < this.minHorizontalStepperScreen) {
-      this.stepperOrientation = this.verticalStepper;
+  private setStepperOrientation(): any {
+    if (this.screenWidth < this.MIN_HORIZONTAL_STEPPER_SCREEN) {
+      this.stepperOrientation = 'vertical';
     } else {
-      this.stepperOrientation = this.horizontalStepper;
+      this.stepperOrientation = 'horizontal';
     }
   }
 
-  get arrayOfParents(): FormArray {
+  public get arrayOfParents(): FormArray {
     return this.studentForm.get('addedParents') as FormArray;
   }
 
-  checkControlErrors(controlName: any) {
+  public checkControlErrors(controlName: string): boolean {
     let control: FormControl = this.studentForm.get(controlName) as FormControl;
     return control.invalid && control.touched;
   }
 
-  addParent(): void {
+  public addParent(): void {
     const dialogRef = this.dialog.open(DialogAddParent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -94,7 +100,7 @@ export class StudentFormComponent implements OnInit {
     });
   }
 
-  editParent(index: number): void {
+  public editParent(index: number): void {
     const dialogRef = this.dialog.open(DialogAddParent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -104,20 +110,19 @@ export class StudentFormComponent implements OnInit {
     });
   }
 
-  deleteParent(index: number): void {
+  public deleteParent(index: number): void {
     this.addedParents = this.arrayOfParents;
     this.addedParents.removeAt(index);
   }
 
-  resetForm(): void {
+  public resetForm(): void {
     this.addedParents = this.arrayOfParents;
     this.addedParents.clear();
     this.studentForm.reset();
   }
 
-  signUp() {
+  public signUp(): void {
     delete this.studentForm.value.confirmPassword;
-    const jsonData = JSON.stringify(this.studentForm.value);
-    localStorage.setItem(this.studentForm.value['email'], jsonData);
+    this.dataService.setUserData(this.studentForm.value);
   }
 }

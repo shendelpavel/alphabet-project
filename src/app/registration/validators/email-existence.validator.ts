@@ -1,6 +1,9 @@
 import { FormGroup } from '@angular/forms';
+import { DataService } from 'src/app/services/data.service';
 
 export function EmailExistenceValidator(controlName: string) {
+  const dataService = new DataService();
+
   return (formGroup: FormGroup) => {
     const control = formGroup.controls[controlName];
 
@@ -8,10 +11,8 @@ export function EmailExistenceValidator(controlName: string) {
       return;
     }
 
-    if (localStorage.getItem(control.value)) {
-      control.setErrors(null);
-    } else {
-      control.setErrors({ DoesNotExist: true });
-    }
+    dataService.getUserData(control.value)
+      ? control.setErrors(null)
+      : control.setErrors({ DoesNotExist: true });
   };
 }

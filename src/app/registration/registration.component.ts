@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent {
-  statuses = ['Parent', 'Student'];
+  readonly statuses = ['Parent', 'Student'];
 
-  formVariant: string = '';
+  public formVariant: string = '';
 }

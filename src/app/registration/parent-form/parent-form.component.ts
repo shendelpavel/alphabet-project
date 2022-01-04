@@ -9,8 +9,10 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { PasswordConfirmValidator } from '../validators/password-confirm.validator';
 import { EmailInUseValidator } from '../validators/email-in-use.validator';
-import { DialogAddNewStudent } from './components/add-new-student.component';
-import { DialogAddExistingStudent } from './components/add-existing-student.component';
+import { DialogAddExistingStudent } from './dialogs/add-existing-student/add-existing-student.component';
+import { DialogAddNewStudent } from './dialogs/add-new-student/add-new-student.component';
+import { StepperOrientation } from '@angular/cdk/stepper';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-parent-form',
@@ -18,33 +20,36 @@ import { DialogAddExistingStudent } from './components/add-existing-student.comp
   styleUrls: ['./parent-form.component.scss'],
 })
 export class ParentFormComponent implements OnInit {
-  minHorizontalStepperScreen: number = 1440;
-  verticalStepper: string = 'vertical';
-  horizontalStepper: string = 'horizontal';
-  stepperOrientation: any = this.horizontalStepper;
-  screenWidth: any;
+  readonly MIN_HORIZONTAL_STEPPER_SCREEN: number = 1440;
+  readonly EMAIL_PATTERN_REGEX =
+    /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  readonly PHONE_PATTERN_REGEX = /^\+?([0-9]{10,13})$/;
 
-  hidePassword = true;
-  hideConfirmPassword = true;
+  private screenWidth: number = 0;
+  private addedNewStudents!: FormArray;
+  private addedExistingStudents!: FormArray;
 
-  phoneRegx = /^\+?([0-9]{10,13})$/;
-  emailRegx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  public stepperOrientation: StepperOrientation = 'horizontal';
+  public hidePassword = true;
+  public hideConfirmPassword = true;
+  public parentForm!: FormGroup;
 
-  parentForm!: FormGroup;
-
-  addedNewStudents!: FormArray;
-
-  addedExistingStudents!: FormArray;
-
-  constructor(public dialog: MatDialog, private formBuilder: FormBuilder) {
+  constructor(
+    private dataService: DataService,
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog
+  ) {
     this.parentForm = this.formBuilder.group(
       {
         name: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
-        email: ['', [Validators.required, Validators.pattern(this.emailRegx)]],
+        email: [
+          '',
+          [Validators.required, Validators.pattern(this.EMAIL_PATTERN_REGEX)],
+        ],
         phoneNumber: [
           '',
-          [Validators.required, Validators.pattern(this.phoneRegx)],
+          [Validators.required, Validators.pattern(this.PHONE_PATTERN_REGEX)],
         ],
         password: ['', [Validators.required]],
         confirmPassword: ['', [Validators.required]],
@@ -66,33 +71,35 @@ export class ParentFormComponent implements OnInit {
   }
 
   @HostListener('window:resize', ['$event'])
-  onWindowResize() {
+  private onWindowResize(): void {
     this.screenWidth = window.innerWidth;
     this.setStepperOrientation();
   }
 
-  setStepperOrientation(): any {
-    if (this.screenWidth < this.minHorizontalStepperScreen) {
-      this.stepperOrientation = this.verticalStepper;
+  private setStepperOrientation(): void {
+    if (this.screenWidth < this.MIN_HORIZONTAL_STEPPER_SCREEN) {
+      this.stepperOrientation = 'vertical';
     } else {
-      this.stepperOrientation = this.horizontalStepper;
+      this.stepperOrientation = 'horizontal';
     }
   }
 
-  get arrayOfNewStudents(): FormArray {
+  public get arrayOfNewStudents(): FormArray {
     return this.parentForm.get('addedNewStudents') as FormArray;
   }
 
-  get arrayOfExistingStudents(): FormArray {
+  public get arrayOfExistingStudents(): FormArray {
     return this.parentForm.get('addedExistingStudents') as FormArray;
   }
 
-  checkControlErrors(controlName: any) {
-    let control: FormControl = this.parentForm.get(controlName) as FormControl;
+  public checkControlErrors(controlName: string): boolean {
+    const control: FormControl = this.parentForm.get(
+      controlName
+    ) as FormControl;
     return control.invalid && control.touched;
   }
 
-  addNewStudent(): void {
+  public addNewStudent(): void {
     const dialogRef = this.dialog.open(DialogAddNewStudent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -102,7 +109,7 @@ export class ParentFormComponent implements OnInit {
     });
   }
 
-  editNewStudent(index: number): void {
+  public editNewStudent(index: number): void {
     const dialogRef = this.dialog.open(DialogAddNewStudent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -112,12 +119,12 @@ export class ParentFormComponent implements OnInit {
     });
   }
 
-  deleteNewStudent(index: number): void {
+  public deleteNewStudent(index: number): void {
     this.addedNewStudents = this.arrayOfNewStudents;
     this.addedNewStudents.removeAt(index);
   }
 
-  addExistingStudent(): void {
+  public addExistingStudent(): void {
     const dialogRef = this.dialog.open(DialogAddExistingStudent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -127,7 +134,7 @@ export class ParentFormComponent implements OnInit {
     });
   }
 
-  editExistingStudent(index: number): void {
+  public editExistingStudent(index: number): void {
     const dialogRef = this.dialog.open(DialogAddExistingStudent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -137,12 +144,12 @@ export class ParentFormComponent implements OnInit {
     });
   }
 
-  deleteExistingStudent(index: number): void {
+  public deleteExistingStudent(index: number): void {
     this.addedExistingStudents = this.arrayOfExistingStudents;
     this.addedExistingStudents.removeAt(index);
   }
 
-  resetForm(): void {
+  public resetForm(): void {
     this.addedNewStudents = this.arrayOfNewStudents;
     this.addedNewStudents.clear();
     this.addedExistingStudents = this.arrayOfExistingStudents;
@@ -150,15 +157,13 @@ export class ParentFormComponent implements OnInit {
     this.parentForm.reset();
   }
 
-  signUp() {
+  public signUp(): void {
     if (this.arrayOfNewStudents.length > 0) {
       for (let newStudent of this.arrayOfNewStudents.controls) {
-        const jsonNewStudent = JSON.stringify(newStudent.value);
-        localStorage.setItem(newStudent.value['email'], jsonNewStudent);
+        this.dataService.setUserData(newStudent.value);
       }
     }
     delete this.parentForm.value.confirmPassword;
-    const jsonParent = JSON.stringify(this.parentForm.value);
-    localStorage.setItem(this.parentForm.value['email'], jsonParent);
+    this.dataService.setUserData(this.parentForm.value);
   }
 }

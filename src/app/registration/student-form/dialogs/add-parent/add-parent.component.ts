@@ -6,34 +6,39 @@ import {
   FormControl,
 } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { EmailExistenceValidator } from '../../validators/email-existence.validator';
+import { EmailExistenceValidator } from 'src/app/registration/validators/email-existence.validator';
+
 @Component({
   selector: 'dialog-add-parent',
-  templateUrl: '../dialogs/dialog-add-parent.html',
+  templateUrl: './dialog-add-parent.html',
 })
 export class DialogAddParent {
-  emailRegx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  readonly EMAIL_PATTERN_REGEX =
+    /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-  parentForm!: FormGroup;
+  public parentForm!: FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<DialogAddParent>,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public dialogRef: MatDialogRef<DialogAddParent>
   ) {
     this.parentForm = this.formBuilder.group(
       {
-        email: ['', [Validators.required, Validators.pattern(this.emailRegx)]],
+        email: [
+          '',
+          [Validators.required, Validators.pattern(this.EMAIL_PATTERN_REGEX)],
+        ],
       },
       { validator: EmailExistenceValidator('email') }
     );
   }
 
-  checkControlErrors(controlName: any) {
+  public checkControlErrors(controlName: string): boolean {
     let control: FormControl = this.parentForm.get(controlName) as FormControl;
     return control.invalid && control.touched;
   }
 
-  onNoClick(): void {
+  public onNoClick(): void {
     this.dialogRef.close();
   }
 }
