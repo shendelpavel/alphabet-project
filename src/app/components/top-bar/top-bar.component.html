@@ -1,40 +1,45 @@
 <div class="dropdown">
   <mat-toolbar class="top-bar">
     <div class="buttons-container">
-      <button mat-icon-button (click)="menuList()">
+      <button mat-icon-button (click)="showMenu()">
         <mat-icon>menu</mat-icon>
       </button>
     </div>
     <div>
-      <button mat-flat-button routerLink="/">
+      <button mat-flat-button routerLink="/" (click)="hideMenu()">
         <h1>My App</h1>
       </button>
     </div>
     <div class="buttons-container">
-      <button mat-icon-button *ngIf="!isLoggedIn" routerLink="/login">
+      <button
+        mat-icon-button
+        *ngIf="!isLoggedIn"
+        routerLink="/login"
+        (click)="hideMenu()"
+      >
         <mat-icon>login</mat-icon>
       </button>
-      <button mat-icon-button *ngIf="isLoggedIn" (click)="logOut()">
+      <button mat-icon-button *ngIf="isLoggedIn" (click)="logOut(); hideMenu()">
         <mat-icon>logout</mat-icon>
       </button>
-      <button mat-icon-button routerLink="/contacts">
+      <button mat-icon-button routerLink="/contacts" (click)="hideMenu()">
         <mat-icon>contact_page</mat-icon>
       </button>
     </div>
   </mat-toolbar>
-
   <div>
-    <mat-toolbar class="menu-list" [class.show-menu-list]="showMenu">
+    <mat-toolbar class="menu-list" [class.show-menu-list]="isMenuShown">
       <div class="menu-element">
-        <button mat-flat-button>
+        <button mat-flat-button (click)="hideMenu()">
           <span>Page 1</span>
         </button>
       </div>
       <div class="menu-element">
-        <button mat-flat-button>
+        <button mat-flat-button (click)="hideMenu()">
           <span>Page 2</span>
         </button>
       </div>
     </mat-toolbar>
   </div>
+  <div *ngIf="isMenuShown" class="block-page" (click)="hideMenu()"></div>
 </div>

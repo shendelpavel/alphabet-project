@@ -1,6 +1,7 @@
 $cardHeight: 720px;
 $cardWidth: 1080px;
-$cardContainerHeight: $cardHeight + 30px;
+$cardExpansion: 30px;
+$cardContainerHeight: $cardHeight + $cardExpansion;
 
 .container {
   width: 100%;
@@ -145,7 +146,7 @@ $cardContainerHeight: $cardHeight + 30px;
 
 .card:hover {
   cursor: pointer;
-  height: $cardHeight + 30px;
-  width: $cardWidth + 30px;
+  height: $cardHeight + $cardExpansion;
+  width: $cardWidth + $cardExpansion;
   box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.4);
 }

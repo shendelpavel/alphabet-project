@@ -11,14 +11,9 @@
           <mat-form-field appearance="fill">
             <mat-label>Name</mat-label>
             <input matInput placeholder="First name" formControlName="name" />
-            <mat-error
-              *ngIf="
-              newStudentForm.controls['name'].invalid &&
-              newStudentForm.controls['name'].touched
-                "
-            >
-              Enter student's name</mat-error
-            >
+            <mat-error *ngIf="checkControlErrors('name')">
+              Enter student's name
+            </mat-error>
           </mat-form-field>
           <div>
             <button mat-button matStepperNext type="button">Next</button>
@@ -38,14 +33,9 @@
               placeholder="Last name"
               formControlName="lastName"
             />
-            <mat-error
-              *ngIf="
-              newStudentForm.controls['lastName'].invalid &&
-              newStudentForm.controls['lastName'].touched
-                "
-            >
-              Enter student's last name</mat-error
-            >
+            <mat-error *ngIf="checkControlErrors('lastName')">
+              Enter student's last name
+            </mat-error>
           </mat-form-field>
           <div>
             <button mat-button matStepperPrevious type="button">Back</button>
@@ -61,14 +51,13 @@
         <div class="step-content-margin-top">
           <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="email" formControlName="email" />
-            <mat-error
-              *ngIf="
-              newStudentForm.controls['email'].invalid &&
-              newStudentForm.controls['email'].touched
-                "
-            >
-              Incorrect email. Ex. email@email.com
+            <input
+              matInput
+              placeholder="Ex. email@email.com"
+              formControlName="email"
+            />
+            <mat-error *ngIf="checkControlErrors('email')">
+              Incorrect email or this email's already in use
             </mat-error>
           </mat-form-field>
           <div>
@@ -90,14 +79,9 @@
               placeholder="Phone number"
               formControlName="phoneNumber"
             />
-            <mat-error
-              *ngIf="
-              newStudentForm.controls['phoneNumber'].invalid &&
-              newStudentForm.controls['phoneNumber'].touched
-                "
-            >
-              Incorrect phone number</mat-error
-            >
+            <mat-error *ngIf="checkControlErrors('phoneNumber')">
+              Incorrect phone number
+            </mat-error>
           </mat-form-field>
           <div>
             <button mat-button matStepperPrevious type="button">Back</button>
@@ -129,68 +113,3 @@
     </form>
   </mat-stepper>
 </div>
-
-<!-- <form [formGroup]="newStudentForm">
-  <div mat-dialog-content>
-    <p>New student information</p>
-    <mat-form-field appearance="fill">
-      <mat-label>Student's name</mat-label>
-      <input matInput formControlName="name" />
-      <mat-error
-        *ngIf="
-          newStudentForm.controls['name'].invalid &&
-          newStudentForm.controls['name'].touched
-          "
-      >
-        Enter student's name</mat-error
-      >
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Student's last name</mat-label>
-      <input matInput formControlName="lastName" />
-      <mat-error
-        *ngIf="
-          newStudentForm.controls['lastName'].invalid &&
-          newStudentForm.controls['lastName'].touched
-          "
-      >
-        Enter student's last name</mat-error
-      >
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Student's email</mat-label>
-      <input matInput formControlName="email" />
-      <mat-error
-        *ngIf="
-          newStudentForm.controls['email'].invalid &&
-          newStudentForm.controls['email'].touched
-    "
-      >
-        Incorrect email. Ex.: email@email.com
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Student's phone number</mat-label>
-      <input matInput formControlName="phoneNumber" />
-      <mat-error
-        *ngIf="
-          newStudentForm.controls['phoneNumber'].invalid &&
-          newStudentForm.controls['phoneNumber'].touched
-          "
-      >
-        Incorrect phone number</mat-error
-      >
-    </mat-form-field>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button
-      mat-button
-      [disabled]="newStudentForm.invalid"
-      [mat-dialog-close]="newStudentForm"
-      cdkFocusInitial
-    >
-      Ok
-    </button>
-  </div>
-</form> -->

@@ -5,7 +5,7 @@ import {
   Validators,
   FormControl,
 } from '@angular/forms';
-import { DataService } from '../data.service';
+import { AuthentificateService } from '../services/authentificate.service';
 import { MatDialog } from '@angular/material/dialog';
 import {
   MatSnackBar,
@@ -35,7 +35,7 @@ export class LoginComponent {
   constructor(
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private dataService: DataService,
+    private authentificateService: AuthentificateService,
     private formBuilder: FormBuilder
   ) {
     this.loginForm = this.formBuilder.group({
@@ -112,8 +112,8 @@ export class LoginComponent {
   }
 
   setSessionData(userData: any) {
-    this.dataService.setStatus(userData.isLoggedIn);
-    this.dataService.setRole(userData.role);
-    this.dataService.setEmail(userData.email);
+    this.authentificateService.setStatus(userData.isLoggedIn);
+    this.authentificateService.setRole(userData.role);
+    this.authentificateService.setEmail(userData.email);
   }
 }

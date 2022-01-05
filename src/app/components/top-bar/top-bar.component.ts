@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { DataService } from 'src/app/data.service';
+import { Component, OnInit } from '@angular/core';
+import { AuthentificateService } from '../../services/authentificate.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -7,30 +7,28 @@ import { DataService } from 'src/app/data.service';
   styleUrls: ['./top-bar.component.scss'],
 })
 export class TopBarComponent implements OnInit {
-  showMenu: boolean = false;
+  public isMenuShown: boolean = false;
 
   isLoggedIn?: boolean;
 
-  @Output() onChanged = new EventEmitter<boolean>();
-
-  constructor(private dataService: DataService) {}
+  constructor(private authentificateService: AuthentificateService) {}
 
   ngOnInit(): void {
-    this.dataService.currentIsLoggedIn.subscribe(
+    this.authentificateService.currentIsLoggedIn.subscribe(
       (isLoggedIn) => (this.isLoggedIn = isLoggedIn)
     );
   }
 
-  menuList(): void {
-    this.showMenu = !this.showMenu;
-    this.onChanged.emit(this.showMenu);
-    this.showMenu
-      ? (document.querySelector('body')!.style.overflow = 'hidden')
-      : (document.querySelector('body')!.style.overflow = 'visible');
+  public showMenu(): void {
+    this.isMenuShown = !this.isMenuShown;
+  }
+
+  public hideMenu(): void {
+    this.isMenuShown = false;
   }
 
   logOut() {
-    const email = this.dataService.getEmail();
+    const email = this.authentificateService.getEmail();
     let jsonUserData = localStorage.getItem(email);
     if (jsonUserData) {
       let userData = JSON.parse(jsonUserData);
@@ -46,8 +44,8 @@ export class TopBarComponent implements OnInit {
   }
 
   setSessionData() {
-    this.dataService.setStatus(false);
-    this.dataService.setRole('');
-    this.dataService.setEmail('');
+    this.authentificateService.setStatus(false);
+    this.authentificateService.setRole('');
+    this.authentificateService.setEmail('');
   }
 }

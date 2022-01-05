@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
-export class DataService {
+export class AuthentificateService {
   private isLoggedIn = new BehaviorSubject(false);
   currentIsLoggedIn = this.isLoggedIn.asObservable();
 
