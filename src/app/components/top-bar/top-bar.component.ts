@@ -1,23 +1,18 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-top-bar',
   templateUrl: './top-bar.component.html',
-  styleUrls: ['./top-bar.component.scss']
+  styleUrls: ['./top-bar.component.scss'],
 })
-export class TopBarComponent implements OnInit {
-  showMenu: boolean = false
+export class TopBarComponent {
+  public isMenuShown: boolean = false;
 
-  @Output() onChanged = new EventEmitter<boolean>();
-
-  menuList(): void {
-    this.showMenu = !this.showMenu;
-    this.onChanged.emit(this.showMenu);
+  public showMenu(): void {
+    this.isMenuShown = !this.isMenuShown;
   }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  public hideMenu(): void {
+    this.isMenuShown = false;
   }
-
 }

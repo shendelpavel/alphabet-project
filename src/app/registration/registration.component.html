@@ -1,0 +1,20 @@
+<div class="form">
+  <div>
+    <div class="status-form">
+      <mat-form-field appearance="fill">
+        <mat-label>Select your status</mat-label>
+        <mat-select [(ngModel)]="formVariant">
+          <mat-option *ngFor="let status of statuses" [value]="status">
+            {{ status }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div *ngIf="formVariant === 'Parent'" class="parent-form">
+      <app-parent-form></app-parent-form>
+    </div>
+    <div *ngIf="formVariant === 'Student'" class="student-form">
+      <app-student-form></app-student-form>
+    </div>
+  </div>
+</div>

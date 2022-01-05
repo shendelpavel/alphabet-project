@@ -1,0 +1,115 @@
+<div mat-dialog-content class="student-form">
+  <h2>New student information</h2>
+  <mat-stepper #stepper orientation="vertical">
+    <form [formGroup]="newStudentForm" novalidate>
+      <mat-step
+        [stepControl]="newStudentForm.controls['name']"
+        errorMessage="Enter your name."
+      >
+        <ng-template matStepLabel>Fill out student's name</ng-template>
+        <div class="step-content-margin-top">
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="First name" formControlName="name" />
+            <mat-error *ngIf="checkControlErrors('name')">
+              Enter student's name
+            </mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step
+        [stepControl]="newStudentForm.controls['lastName']"
+        errorMessage="Enter student's last name."
+      >
+        <ng-template matStepLabel>Fill out student's last name</ng-template>
+        <div class="step-content-margin-top">
+          <mat-form-field appearance="fill">
+            <mat-label>Last name</mat-label>
+            <input
+              matInput
+              placeholder="Last name"
+              formControlName="lastName"
+            />
+            <mat-error *ngIf="checkControlErrors('lastName')">
+              Enter student's last name
+            </mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step
+        [stepControl]="newStudentForm.controls['email']"
+        errorMessage="Incorrect email."
+      >
+        <ng-template matStepLabel>Fill out student's email</ng-template>
+        <div class="step-content-margin-top">
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              placeholder="Ex. email@email.com"
+              formControlName="email"
+            />
+            <mat-error *ngIf="checkControlErrors('email')">
+              Incorrect email or this email's already in use
+            </mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step
+        [stepControl]="newStudentForm.controls['phoneNumber']"
+        errorMessage="Incorrect phone number."
+      >
+        <ng-template matStepLabel>Fill out student's phone number</ng-template>
+        <div class="step-content-margin-top">
+          <mat-form-field appearance="fill">
+            <mat-label>Phone number</mat-label>
+            <input
+              matInput
+              placeholder="Phone number"
+              formControlName="phoneNumber"
+            />
+            <mat-error *ngIf="checkControlErrors('phoneNumber')">
+              Incorrect phone number
+            </mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <div class="step-content-margin-top">
+          <h3>
+            {{ newStudentForm.invalid ? "Please fill in all required fields" :
+            "You are now done." }}
+          </h3>
+          <div mat-dialog-actions>
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button (click)="onNoClick()">Cancel</button>
+            <button
+              mat-button
+              [disabled]="newStudentForm.invalid"
+              [mat-dialog-close]="newStudentForm"
+              cdkFocusInitial
+            >
+              Add student
+            </button>
+          </div>
+        </div>
+      </mat-step>
+    </form>
+  </mat-stepper>
+</div>
