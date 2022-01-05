@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  FormControl,
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthentificateService } from '../services/authentificate.service';
 import { MatDialog } from '@angular/material/dialog';
 import {
@@ -12,7 +7,8 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import { DialogSetPassword } from './components/set-password.component';
+import { DialogSetPassword } from './dialogs/set-password.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,23 +16,23 @@ import { DialogSetPassword } from './components/set-password.component';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  hasPassword: boolean = true;
-  hidePassword: boolean = true;
+  readonly SNACK_BAR_MESSAGE: string = 'You must to create password!!!';
+  readonly SNACK_BAR_CLOSE: string = 'Ok';
+  readonly SNACK_BAR_HORIZONTAL_POSITION: MatSnackBarHorizontalPosition =
+    'center';
+  readonly SNACK_BAR_VERTICAL_POSITION: MatSnackBarVerticalPosition = 'top';
 
-  snackBarMessage: string = 'You must to create password!!!';
-  snackBarClose: string = 'Ok';
-  snackBarHorizontal: MatSnackBarHorizontalPosition = 'center';
-  snackBarVertical: MatSnackBarVerticalPosition = 'top';
-
-  showErrorMessage: boolean = false;
-
-  loginForm!: FormGroup;
+  public hasPassword: boolean = true;
+  public hidePassword: boolean = true;
+  public showErrorMessage: boolean = false;
+  public loginForm!: FormGroup;
 
   constructor(
+    private router: Router,
     private _snackBar: MatSnackBar,
-    public dialog: MatDialog,
     private authentificateService: AuthentificateService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required]],
@@ -44,76 +40,62 @@ export class LoginComponent {
     });
   }
 
-  disablePasswordField() {
+  private allowLogIn(): void {
+    this.loginForm.controls['email'].setErrors(null);
+    this.loginForm.controls['password'].setErrors(null);
+    this.showErrorMessage = false;
+    this.router.navigate(['/']);
+  }
+
+  private forbidLogIn(): void {
+    this.loginForm.controls['email'].setErrors([{ loginNotConfirm: true }]);
+    this.loginForm.controls['password'].setErrors([{ loginNotConfirm: true }]);
+    this.showErrorMessage = true;
+  }
+
+  private setPassword(): void {
+    const dialogRef = this.dialog.open(DialogSetPassword);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.authentificateService.setPassword(result.value.password);
+        this.allowLogIn();
+      } else {
+        this._snackBar.open(this.SNACK_BAR_MESSAGE, this.SNACK_BAR_CLOSE, {
+          horizontalPosition: this.SNACK_BAR_HORIZONTAL_POSITION,
+          verticalPosition: this.SNACK_BAR_VERTICAL_POSITION,
+        });
+      }
+    });
+  }
+
+  public disablePasswordField(): void {
     this.hasPassword = !this.hasPassword;
     this.hasPassword
       ? this.loginForm.get('password')!.enable()
       : this.loginForm.get('password')!.disable();
   }
 
-  logIn() {
+  public logIn(): void {
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
-    const jsonUserData = this.checkEmail(email);
-    if (jsonUserData) {
-      const userData = JSON.parse(jsonUserData);
-      userData.password || this.hasPassword
-        ? this.checkPassword(password, userData.password, userData)
-        : this.setPassword(userData);
-    } else {
-      this.forbidLogIn();
-    }
-  }
-
-  checkEmail(email: string) {
-    let jsonUserData = localStorage.getItem(email);
-    return jsonUserData;
-  }
-
-  checkPassword(password: string, dataPassword: string, userData: any) {
-    password === dataPassword ? this.allowLogIn(userData) : this.forbidLogIn();
-  }
-
-  setPassword(userData: any) {
-    const dialogRef = this.dialog.open(DialogSetPassword);
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        userData.password = result.value.password;
-        const jsonUserData = JSON.stringify(userData);
-        localStorage.setItem(userData.email, jsonUserData);
-        this.allowLogIn(userData);
-      } else {
-        this._snackBar.open(this.snackBarMessage, this.snackBarClose, {
-          horizontalPosition: this.snackBarHorizontal,
-          verticalPosition: this.snackBarVertical,
-        });
+    const authStatus: string = this.authentificateService.login(
+      email,
+      password,
+      this.hasPassword
+    );
+    switch (authStatus) {
+      case 'allow': {
+        this.allowLogIn();
+        break;
       }
-    });
-  }
-
-  forbidLogIn() {
-    this.loginForm.controls['email'].setErrors([{ loginNotConfirm: true }]);
-    this.loginForm.controls['password'].setErrors([{ loginNotConfirm: true }]);
-    this.showErrorMessage = true;
-  }
-
-  allowLogIn(userData: any) {
-    this.loginForm.controls['email'].setErrors(null);
-    this.loginForm.controls['password'].setErrors(null);
-    this.showErrorMessage = false;
-    this.setStatus(userData);
-    this.setSessionData(userData);
-  }
-
-  setStatus(userData: any) {
-    userData.isLoggedIn = true;
-    const jsonUserData = JSON.stringify(userData);
-    localStorage.setItem(userData.email, jsonUserData);
-  }
-
-  setSessionData(userData: any) {
-    this.authentificateService.setStatus(userData.isLoggedIn);
-    this.authentificateService.setRole(userData.role);
-    this.authentificateService.setEmail(userData.email);
+      case 'forbid': {
+        this.forbidLogIn();
+        break;
+      }
+      case 'setPassword': {
+        this.setPassword();
+        break;
+      }
+    }
   }
 }

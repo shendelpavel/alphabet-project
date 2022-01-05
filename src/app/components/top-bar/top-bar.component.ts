@@ -8,8 +8,7 @@ import { AuthentificateService } from '../../services/authentificate.service';
 })
 export class TopBarComponent implements OnInit {
   public isMenuShown: boolean = false;
-
-  isLoggedIn?: boolean;
+  public isLoggedIn?: boolean;
 
   constructor(private authentificateService: AuthentificateService) {}
 
@@ -27,25 +26,8 @@ export class TopBarComponent implements OnInit {
     this.isMenuShown = false;
   }
 
-  logOut() {
-    const email = this.authentificateService.getEmail();
-    let jsonUserData = localStorage.getItem(email);
-    if (jsonUserData) {
-      let userData = JSON.parse(jsonUserData);
-      this.setStatus(userData);
-    }
-  }
-
-  setStatus(userData: any) {
-    userData.isLoggedIn = false;
-    this.setSessionData();
-    const jsonUserData = JSON.stringify(userData);
-    localStorage.setItem(userData.email, jsonUserData);
-  }
-
-  setSessionData() {
-    this.authentificateService.setStatus(false);
-    this.authentificateService.setRole('');
-    this.authentificateService.setEmail('');
+  public logOut(): void {
+    this.authentificateService.setLogOutStatus();
+    this.authentificateService.clearSessionData();
   }
 }

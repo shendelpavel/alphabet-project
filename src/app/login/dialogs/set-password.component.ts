@@ -14,14 +14,13 @@ import { PasswordConfirmValidator } from '../../validators/password-confirm.vali
   styleUrls: ['../dialogs/dialog-set-password.scss'],
 })
 export class DialogSetPassword {
-  hidePassword = true;
-  hideConfirmPassword = true;
-
-  setPasswordForm!: FormGroup;
+  public hidePassword = true;
+  public hideConfirmPassword = true;
+  public setPasswordForm!: FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<DialogSetPassword>,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public dialogRef: MatDialogRef<DialogSetPassword>
   ) {
     this.setPasswordForm = this.formBuilder.group(
       {
@@ -32,14 +31,14 @@ export class DialogSetPassword {
     );
   }
 
-  checkControlErrors(controlName: any) {
+  public checkControlErrors(controlName: string): boolean {
     let control: FormControl = this.setPasswordForm.get(
       controlName
     ) as FormControl;
     return control.invalid && control.touched;
   }
 
-  onNoClick(): void {
+  public onNoClick(): void {
     this.dialogRef.close();
   }
 }

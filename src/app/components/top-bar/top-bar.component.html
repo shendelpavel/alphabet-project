@@ -19,7 +19,12 @@
       >
         <mat-icon>login</mat-icon>
       </button>
-      <button mat-icon-button *ngIf="isLoggedIn" (click)="logOut(); hideMenu()">
+      <button
+        mat-icon-button
+        *ngIf="isLoggedIn"
+        (click)="logOut(); hideMenu()"
+        routerLink="/login"
+      >
         <mat-icon>logout</mat-icon>
       </button>
       <button mat-icon-button routerLink="/contacts" (click)="hideMenu()">
