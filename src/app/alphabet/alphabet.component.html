@@ -1,0 +1,16 @@
+<div class="alphabet">
+  <div class="alphabet-title"><h1>Alphabet</h1></div>
+  <div class="alphabet-container">
+    <div
+      class="card-container"
+      *ngFor="let letter of alphabet"
+      [title]="letter.name + ' details'"
+      [routerLink]="['/letters', letter.id]"
+    >
+      <div class="card">
+        <img class="letter-image" [src]="letter.letterImg" />
+      </div>
+      <div class="hover-letter"></div>
+    </div>
+  </div>
+</div>

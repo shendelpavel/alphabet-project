@@ -10,17 +10,24 @@ import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
+import { AlphabetComponent } from './alphabet/alphabet.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contacts', component: ContactsComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'alphabet', component: AlphabetComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
-  declarations: [HomeComponent, ContactsComponent, PageNotFoundComponent],
+  declarations: [
+    HomeComponent,
+    ContactsComponent,
+    AlphabetComponent,
+    PageNotFoundComponent,
+  ],
   imports: [
     CommonModule,
     SharedModule,
