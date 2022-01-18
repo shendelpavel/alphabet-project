@@ -10,12 +10,14 @@ import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
+import { LoginGuard } from './guards/login.guard';
+import { LoggedInGuard } from './guards/loggedin.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'contacts', component: ContactsComponent },
+  { path: 'contacts', component: ContactsComponent, canActivate: [LoginGuard] },
   { path: 'registration', component: RegistrationComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate: [LoggedInGuard] },
   { path: '**', component: PageNotFoundComponent },
 ];
 

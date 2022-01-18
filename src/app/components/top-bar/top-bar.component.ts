@@ -13,7 +13,7 @@ export class TopBarComponent implements OnInit {
   constructor(private authentificateService: AuthentificateService) {}
 
   ngOnInit(): void {
-    this.authentificateService.currentIsLoggedIn.subscribe(
+    this.authentificateService.currentIsLoggedIn$.subscribe(
       (isLoggedIn) => (this.isLoggedIn = isLoggedIn)
     );
   }
@@ -26,8 +26,12 @@ export class TopBarComponent implements OnInit {
     this.isMenuShown = false;
   }
 
-  public logOut(): void {
-    this.authentificateService.setLogOutStatus();
-    this.authentificateService.clearSessionData();
+  public clickLogoutButton(): void {
+    this.logOut();
+    this.hideMenu();
+  }
+
+  private logOut(): void {
+    this.authentificateService.logOut();
   }
 }

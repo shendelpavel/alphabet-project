@@ -1,8 +1,9 @@
 <div class="form">
   <div class="form-title"><h1>Login</h1></div>
-  <div class="error-mesage" [class.show-error-message]="showErrorMessage">
-    <div>
-      <b>Failed to sign in.</b><br />Please make sure that you've entered your
+  <div class="help" (mouseover)="showTooltip()" (mouseout)="hideTooltip()">
+    <mat-icon> help_outline</mat-icon>
+    <my-tooltip *ngIf="isTooltipShown" [tooltipElement]="tooltipElement">
+      <b>Failed to sign in?</b><br />Please make sure that you've entered your
       <b>email</b> and <b>password</b> correctly.
       <ul>
         <li>
@@ -21,7 +22,7 @@
           </span>
         </li>
       </ul>
-    </div>
+    </my-tooltip>
   </div>
   <form [formGroup]="loginForm" novalidate>
     <div class="form-container">
@@ -37,15 +38,6 @@
       </div>
       <div>
         <div>
-          <mat-slide-toggle
-            color="warn"
-            checked="true"
-            (click)="disablePasswordField()"
-          >
-            Do you have a password?
-          </mat-slide-toggle>
-        </div>
-        <div>
           <mat-form-field appearance="fill">
             <mat-label>Password</mat-label>
             <input
@@ -57,10 +49,9 @@
             <button
               mat-icon-button
               matSuffix
-              [disabled]="!hasPassword"
               type="button"
               (click)="hidePassword = !hidePassword"
-              [attr.aria-label]="'Hide password'"
+              aria-label="Hide password"
               [attr.aria-pressed]="hidePassword"
             >
               <mat-icon>{{

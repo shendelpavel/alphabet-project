@@ -19,8 +19,8 @@ export class DialogSetPassword {
   public setPasswordForm!: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<DialogSetPassword>
+    public dialogRef: MatDialogRef<DialogSetPassword>,
+    private formBuilder: FormBuilder
   ) {
     this.setPasswordForm = this.formBuilder.group(
       {
@@ -38,7 +38,7 @@ export class DialogSetPassword {
     return control.invalid && control.touched;
   }
 
-  public onNoClick(): void {
+  public cancel(): void {
     this.dialogRef.close();
   }
 }
