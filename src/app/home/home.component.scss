@@ -1,6 +1,7 @@
 $cardHeight: 720px;
 $cardWidth: 1080px;
 $cardExpansion: 30px;
+$cardContainerHeight: $cardHeight + $cardExpansion;
 
 .container {
   width: 100%;
@@ -11,6 +12,14 @@ $cardExpansion: 30px;
 .block-text {
   padding: 129px 0px;
   border-bottom: 1px solid rgba(25, 25, 25, 0.1);
+
+  @media (max-width: 767px) {
+    padding: 89px 0px;
+  }
+
+  @media (max-width: 424px) {
+    padding: 49px 0px;
+  }
 }
 
 .stage-title,
@@ -51,11 +60,52 @@ $cardExpansion: 30px;
   color: rgb(255, 250, 242);
   border-radius: 10px;
   transition: all 0.2s;
+
+  @media (max-width: 1439px) {
+    height: $cardHeight - 100px;
+    width: $cardWidth - 100px;
+  }
+
+  @media (max-width: 1023px) {
+    height: $cardHeight - 350px;
+    width: $cardWidth - 350px;
+  }
+
+  @media (max-width: 767px) {
+    height: $cardHeight - 450px;
+    width: $cardWidth - 700px;
+  }
+
+  @media (max-width: 424px) {
+    height: $cardHeight - 500px;
+    width: $cardWidth - 750px;
+  }
+
+  @media (max-width: 374px) {
+    height: $cardHeight - 500px;
+    width: $cardWidth - 800px;
+  }
 }
 
 .card-container {
-  height: $cardHeight + $cardExpansion;
+  height: $cardContainerHeight;
   margin-top: 35px;
+
+  @media (max-width: 1439px) {
+    height: $cardContainerHeight - 100px;
+  }
+
+  @media (max-width: 1023px) {
+    height: $cardContainerHeight - 350px;
+  }
+
+  @media (max-width: 767px) {
+    height: $cardContainerHeight - 450px;
+  }
+
+  @media (max-width: 424px) {
+    height: $cardContainerHeight - 525px;
+  }
 }
 
 .project-1-card {

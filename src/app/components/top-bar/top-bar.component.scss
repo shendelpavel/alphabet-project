@@ -11,6 +11,10 @@
   border-bottom: 1px solid rgba(25, 25, 25, 0.1);
 }
 
+.buttons-container {
+  width: 80px;
+}
+
 .menu-list {
   position: absolute;
   z-index: 1001;
@@ -23,7 +27,7 @@
   }
 }
 
-.show-menu-list {
+.shown-menu-list {
   height: 175px;
 }
 

@@ -116,7 +116,7 @@
                 matSuffix
                 type="button"
                 (click)="hidePassword = !hidePassword"
-                [attr.aria-label]="'Hide password'"
+                aria-label="Hide password"
                 [attr.aria-pressed]="hidePassword"
               >
                 <mat-icon>{{
@@ -143,7 +143,7 @@
                 matSuffix
                 type="button"
                 (click)="hideConfirmPassword = !hideConfirmPassword"
-                [attr.aria-label]="'Hide password'"
+                aria-label="Hide password"
                 [attr.aria-pressed]="hideConfirmPassword"
               >
                 <mat-icon>{{
@@ -164,13 +164,13 @@
             <div class="new-students">
               <div
                 class="student-list"
-                [class.show-student-list]="arrayOfNewStudents.length > 0"
+                [class.show-student-list]="newStudentsList.length > 0"
               >
                 <mat-chip-list aria-label="added students">
                   <div class="student-list-overflow">
                     <mat-chip
                       *ngFor="
-                        let student of arrayOfNewStudents.controls;
+                        let student of newStudentsList.controls;
                         let i = index
                       "
                       (click)="editNewStudent(i)"
@@ -193,13 +193,13 @@
             <div class="existing-students">
               <div
                 class="student-list"
-                [class.show-student-list]="arrayOfExistingStudents.length > 0"
+                [class.show-student-list]="existingStudentsList.length > 0"
               >
                 <mat-chip-list aria-label="added students">
                   <div class="student-list-overflow">
                     <mat-chip
                       *ngFor="
-                        let student of arrayOfExistingStudents.controls;
+                        let student of existingStudentsList.controls;
                         let i = index
                       "
                       (click)="editExistingStudent(i)"
@@ -251,6 +251,7 @@
                 mat-button
                 [disabled]="parentForm.invalid"
                 (click)="signUp()"
+                routerLink="/login"
               >
                 Sign Up
               </button>

@@ -6,6 +6,11 @@ import {
   FormControl,
 } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import {
+  EMAIL_PATTERN_REGEX,
+  PHONE_PATTERN_REGEX,
+} from 'src/app/registration/regular-expressions';
+import { DataService } from 'src/app/services/data.service';
 import { EmailInUseValidator } from '../../../validators/email-in-use.validator';
 
 @Component({
@@ -14,31 +19,32 @@ import { EmailInUseValidator } from '../../../validators/email-in-use.validator'
   styleUrls: ['./dialog-add-new-student.scss'],
 })
 export class DialogAddNewStudent {
-  readonly PHONE_PATTERN_REGEX = /^\+?([0-9]{10,13})$/;
-  readonly EMAIL_PATTERN_REGEX =
-    /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
   public newStudentForm!: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<DialogAddNewStudent>
+    public dialogRef: MatDialogRef<DialogAddNewStudent>,
+    private dataService: DataService,
+    private formBuilder: FormBuilder
   ) {
     this.newStudentForm = this.formBuilder.group(
       {
+        role: ['student'],
+        isLoggedIn: [false],
         name: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
         email: [
           '',
-          [Validators.required, Validators.pattern(this.EMAIL_PATTERN_REGEX)],
+          [Validators.required, Validators.pattern(EMAIL_PATTERN_REGEX)],
         ],
         phoneNumber: [
           '',
-          [Validators.required, Validators.pattern(this.PHONE_PATTERN_REGEX)],
+          [Validators.required, Validators.pattern(PHONE_PATTERN_REGEX)],
         ],
+        password: [''],
+        addedParents: this.formBuilder.array([]),
       },
       {
-        validator: [EmailInUseValidator('email')],
+        validator: [EmailInUseValidator('email', this.dataService.getUserData)],
       }
     );
   }
@@ -50,7 +56,7 @@ export class DialogAddNewStudent {
     return control.invalid && control.touched;
   }
 
-  public onNoClick(): void {
+  public cancel(): void {
     this.dialogRef.close();
   }
 }

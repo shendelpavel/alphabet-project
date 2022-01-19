@@ -1,0 +1,78 @@
+<div class="form">
+  <div class="form-title"><h1>Login</h1></div>
+  <div class="help" (mouseover)="showTooltip()" (mouseout)="hideTooltip()">
+    <mat-icon> help_outline</mat-icon>
+    <my-tooltip *ngIf="isTooltipShown" [tooltipElement]="tooltipElement">
+      <b>Failed to sign in?</b><br />Please make sure that you've entered your
+      <b>email</b> and <b>password</b> correctly.
+      <ul>
+        <li>
+          <span>Is <b>Caps Lock</b> on?</span>
+        </li>
+        <li>
+          <span>
+            Maybe you don't have a <b>password</b>? Try to switch slide toggle
+            to the left.
+          </span>
+        </li>
+        <li>
+          <span>
+            Try typing your password in a text editor and then
+            <b>copying and pasting</b> it into the "Password" field.
+          </span>
+        </li>
+      </ul>
+    </my-tooltip>
+  </div>
+  <form [formGroup]="loginForm" novalidate>
+    <div class="form-container">
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your email</mat-label>
+          <input
+            matInput
+            placeholder="pat@example.com"
+            formControlName="email"
+          />
+        </mat-form-field>
+      </div>
+      <div>
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              placeholder="Password"
+              [type]="hidePassword ? 'password' : 'text'"
+              formControlName="password"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="hidePassword = !hidePassword"
+              aria-label="Hide password"
+              [attr.aria-pressed]="hidePassword"
+            >
+              <mat-icon>{{
+                hidePassword ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-buttons">
+        <div>
+          <button mat-raised-button color="warn" (click)="logIn()">
+            Log In
+          </button>
+        </div>
+        <div>
+          <button mat-raised-button color="primary" routerLink="/registration">
+            Registration
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,6 +12,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 @NgModule({
@@ -22,6 +25,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
@@ -34,8 +38,11 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
     MatMenuModule,
     MatStepperModule,
     MatChipsModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
   ],
   exports: [
+    RouterModule,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
@@ -48,6 +55,8 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
     MatMenuModule,
     MatStepperModule,
     MatChipsModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
   ],
 })
 export class SharedModule {}

@@ -1,6 +1,6 @@
 <div class="dropdown">
   <mat-toolbar class="top-bar">
-    <div>
+    <div class="buttons-container">
       <button mat-icon-button (click)="showMenu()">
         <mat-icon>menu</mat-icon>
       </button>
@@ -10,14 +10,30 @@
         <h1>My App</h1>
       </button>
     </div>
-    <div>
+    <div class="buttons-container">
+      <button
+        mat-icon-button
+        *ngIf="!isLoggedIn"
+        routerLink="/login"
+        (click)="hideMenu()"
+      >
+        <mat-icon>login</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        *ngIf="isLoggedIn"
+        (click)="clickLogoutButton()"
+        routerLink="/login"
+      >
+        <mat-icon>logout</mat-icon>
+      </button>
       <button mat-icon-button routerLink="/contacts" (click)="hideMenu()">
         <mat-icon>contact_page</mat-icon>
       </button>
     </div>
   </mat-toolbar>
   <div>
-    <mat-toolbar class="menu-list" [class.show-menu-list]="isMenuShown">
+    <mat-toolbar class="menu-list" [class.shown-menu-list]="isMenuShown">
       <div class="menu-element">
         <button mat-flat-button (click)="hideMenu()">
           <span>Page 1</span>

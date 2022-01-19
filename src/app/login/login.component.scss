@@ -1,0 +1,54 @@
+$tooltipHeight: 284px;
+$tooltipWidth: 258px;
+$iconSize: 24px;
+
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  width: 740px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 37px 30px;
+}
+
+.form-title {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(25, 25, 25, 0.1);
+  margin-bottom: 23px;
+  h1 {
+    margin: 0;
+  }
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form ::ng-deep .mat-form-field {
+  width: 210px;
+  font-size: 17px;
+}
+
+.form-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.help {
+  cursor: help;
+  height: $iconSize;
+  margin-bottom: 12px;
+}
+
+.tooltip-template {
+  display: none;
+}

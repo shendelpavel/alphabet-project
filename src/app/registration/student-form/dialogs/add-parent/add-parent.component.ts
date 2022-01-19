@@ -6,39 +6,46 @@ import {
   FormControl,
 } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { EMAIL_PATTERN_REGEX } from 'src/app/registration/regular-expressions';
 import { EmailExistenceValidator } from 'src/app/registration/validators/email-existence.validator';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'dialog-add-parent',
   templateUrl: './dialog-add-parent.html',
 })
 export class DialogAddParent {
-  readonly EMAIL_PATTERN_REGEX =
-    /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
   public parentForm!: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<DialogAddParent>
+    public dialogRef: MatDialogRef<DialogAddParent>,
+    private dataService: DataService,
+    private formBuilder: FormBuilder
   ) {
     this.parentForm = this.formBuilder.group(
       {
         email: [
           '',
-          [Validators.required, Validators.pattern(this.EMAIL_PATTERN_REGEX)],
+          [Validators.required, Validators.pattern(EMAIL_PATTERN_REGEX)],
         ],
       },
-      { validator: EmailExistenceValidator('email') }
+      {
+        validator: EmailExistenceValidator(
+          'email',
+          this.dataService.getUserData
+        ),
+      }
     );
   }
 
   public checkControlErrors(controlName: string): boolean {
-    let control: FormControl = this.parentForm.get(controlName) as FormControl;
+    const control: FormControl = this.parentForm.get(
+      controlName
+    ) as FormControl;
     return control.invalid && control.touched;
   }
 
-  public onNoClick(): void {
+  public cancel(): void {
     this.dialogRef.close();
   }
 }

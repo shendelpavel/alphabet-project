@@ -1,0 +1,24 @@
+$maxTooltipHeight: 284px;
+$maxTooltipWidth: 258px;
+
+.tooltip {
+  position: absolute;
+  z-index: 1001;
+  height: max-content;
+  max-height: $maxTooltipHeight;
+  width: max-content;
+  max-width: $maxTooltipWidth;
+  font-size: 15px;
+  color: #fff;
+  border-radius: 10px;
+  background: rgb(103, 58, 183);
+  background: linear-gradient(
+    79deg,
+    rgba(103, 58, 183, 1) 20%,
+    rgba(244, 67, 54, 1) 80%
+  );
+
+  .tooltip-content {
+    margin: 1em;
+  }
+}
