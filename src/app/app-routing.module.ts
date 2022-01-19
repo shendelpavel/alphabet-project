@@ -13,13 +13,22 @@ import { LoginComponent } from './login/login.component';
 import { AlphabetComponent } from './alphabet/alphabet.component';
 import { LoginGuard } from './guards/login.guard';
 import { LoggedInGuard } from './guards/loggedin.guard';
+import { StudentGuard } from './guards/student.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contacts', component: ContactsComponent, canActivate: [LoginGuard] },
-  { path: 'registration', component: RegistrationComponent },
+  {
+    path: 'registration',
+    component: RegistrationComponent,
+    canActivate: [LoggedInGuard],
+  },
   { path: 'login', component: LoginComponent, canActivate: [LoggedInGuard] },
-  { path: 'alphabet', component: AlphabetComponent },
+  {
+    path: 'alphabet',
+    component: AlphabetComponent,
+    canActivate: [LoginGuard, StudentGuard],
+  },
   { path: '**', component: PageNotFoundComponent },
 ];
 
