@@ -116,7 +116,7 @@
                 matSuffix
                 type="button"
                 (click)="hidePassword = !hidePassword"
-                [attr.aria-label]="'Hide password'"
+                aria-label="Hide password"
                 [attr.aria-pressed]="hidePassword"
               >
                 <mat-icon>{{
@@ -143,7 +143,7 @@
                 matSuffix
                 type="button"
                 (click)="hideConfirmPassword = !hideConfirmPassword"
-                [attr.aria-label]="'Hide password'"
+                aria-label="Hide password"
                 [attr.aria-pressed]="hideConfirmPassword"
               >
                 <mat-icon>{{
@@ -163,15 +163,12 @@
             <h2>You can add parents</h2>
             <div
               class="parent-list"
-              [class.show-parent-list]="arrayOfParents.length > 0"
+              [class.show-parent-list]="parentsList.length > 0"
             >
               <mat-chip-list aria-label="added parents">
                 <div class="parent-list-overflow">
                   <mat-chip
-                    *ngFor="
-                      let parent of arrayOfParents.controls;
-                      let i = index
-                    "
+                    *ngFor="let parent of parentsList.controls; let i = index"
                     (click)="editParent(i)"
                     (removed)="deleteParent(i)"
                   >

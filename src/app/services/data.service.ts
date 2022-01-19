@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
-import { User } from './shared/user.model';
+import { Parent, Student } from './shared/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
-  public setUserData(data: User): void {
-    const jsonData = JSON.stringify(data);
-    if (data.email) localStorage.setItem(data['email'], jsonData);
+  public setParentData(userData: Parent): void {
+    const jsonData = JSON.stringify(userData);
+    if (userData.email) localStorage.setItem(userData['email'], jsonData);
   }
 
-  public getUserData(key: string): string | null {
-    return localStorage.getItem(key);
+  public setStudentData(userData: Student): void {
+    const jsonData = JSON.stringify(userData);
+    if (userData.email) localStorage.setItem(userData['email'], jsonData);
+  }
+
+  public getUserData(key: string): string {
+    const userData = localStorage.getItem(key);
+    if (userData) {
+      return userData;
+    } else return '';
   }
 }

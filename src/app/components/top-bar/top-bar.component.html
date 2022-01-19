@@ -22,7 +22,7 @@
       <button
         mat-icon-button
         *ngIf="isLoggedIn"
-        (click)="logOut(); hideMenu()"
+        (click)="clickLogoutButton()"
         routerLink="/login"
       >
         <mat-icon>logout</mat-icon>
@@ -33,7 +33,7 @@
     </div>
   </mat-toolbar>
   <div>
-    <mat-toolbar class="menu-list" [class.show-menu-list]="isMenuShown">
+    <mat-toolbar class="menu-list" [class.shown-menu-list]="isMenuShown">
       <div class="menu-element">
         <button mat-flat-button (click)="hideMenu()">
           <span>Page 1</span>

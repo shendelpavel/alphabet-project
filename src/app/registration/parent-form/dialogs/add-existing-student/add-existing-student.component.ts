@@ -6,6 +6,8 @@ import {
   FormControl,
 } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { EMAIL_PATTERN_REGEX } from 'src/app/registration/regular-expressions';
+import { DataService } from 'src/app/services/data.service';
 import { EmailExistenceValidator } from '../../../validators/email-existence.validator';
 
 @Component({
@@ -13,23 +15,26 @@ import { EmailExistenceValidator } from '../../../validators/email-existence.val
   templateUrl: './dialog-add-existing-student.html',
 })
 export class DialogAddExistingStudent {
-  readonly EMAIL_PATTERN_REGEX =
-    /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
   public existingStudentForm!: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<DialogAddExistingStudent>
+    public dialogRef: MatDialogRef<DialogAddExistingStudent>,
+    private dataService: DataService,
+    private formBuilder: FormBuilder
   ) {
     this.existingStudentForm = this.formBuilder.group(
       {
         email: [
           '',
-          [Validators.required, Validators.pattern(this.EMAIL_PATTERN_REGEX)],
+          [Validators.required, Validators.pattern(EMAIL_PATTERN_REGEX)],
         ],
       },
-      { validator: EmailExistenceValidator('email') }
+      {
+        validator: EmailExistenceValidator(
+          'email',
+          this.dataService.getUserData
+        ),
+      }
     );
   }
 
@@ -40,7 +45,7 @@ export class DialogAddExistingStudent {
     return control.invalid && control.touched;
   }
 
-  public onNoClick(): void {
+  public cancel(): void {
     this.dialogRef.close();
   }
 }

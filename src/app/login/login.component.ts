@@ -9,6 +9,8 @@ import {
 } from '@angular/material/snack-bar';
 import { DialogSetPassword } from './dialogs/set-password.component';
 import { Router } from '@angular/router';
+import { AuthStatus } from '../services/shared/auth-status';
+import { TooltipService } from '../services/tooltip.service';
 
 @Component({
   selector: 'app-login',
@@ -22,17 +24,24 @@ export class LoginComponent {
     'center';
   readonly SNACK_BAR_VERTICAL_POSITION: MatSnackBarVerticalPosition = 'top';
 
-  public hasPassword: boolean = true;
   public hidePassword: boolean = true;
-  public showErrorMessage: boolean = false;
+  public isTooltipShown: boolean = false;
   public loginForm!: FormGroup;
+  public tooltipElement!: DOMRect;
+
+  private statuses = {
+    allow: () => this.allowLogIn(),
+    forbid: () => this.forbidLogIn(),
+    setPassword: () => this.setPassword(),
+  };
 
   constructor(
+    public dialog: MatDialog,
+    private tooltipService: TooltipService,
     private router: Router,
-    private _snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private authentificateService: AuthentificateService,
-    private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    private formBuilder: FormBuilder
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required]],
@@ -40,17 +49,29 @@ export class LoginComponent {
     });
   }
 
+  public logIn(): void {
+    const email = this.loginForm.value.email;
+    const password = this.loginForm.value.password;
+    const authStatus: AuthStatus = this.authentificateService.login(
+      email,
+      password
+    );
+    this.setAuthStatus(authStatus);
+  }
+
+  private setAuthStatus(authStatus: AuthStatus): void {
+    this.statuses[authStatus]();
+  }
+
   private allowLogIn(): void {
     this.loginForm.controls['email'].setErrors(null);
     this.loginForm.controls['password'].setErrors(null);
-    this.showErrorMessage = false;
     this.router.navigate(['/']);
   }
 
   private forbidLogIn(): void {
     this.loginForm.controls['email'].setErrors([{ loginNotConfirm: true }]);
     this.loginForm.controls['password'].setErrors([{ loginNotConfirm: true }]);
-    this.showErrorMessage = true;
   }
 
   private setPassword(): void {
@@ -60,7 +81,7 @@ export class LoginComponent {
         this.authentificateService.setPassword(result.value.password);
         this.allowLogIn();
       } else {
-        this._snackBar.open(this.SNACK_BAR_MESSAGE, this.SNACK_BAR_CLOSE, {
+        this.snackBar.open(this.SNACK_BAR_MESSAGE, this.SNACK_BAR_CLOSE, {
           horizontalPosition: this.SNACK_BAR_HORIZONTAL_POSITION,
           verticalPosition: this.SNACK_BAR_VERTICAL_POSITION,
         });
@@ -68,34 +89,17 @@ export class LoginComponent {
     });
   }
 
-  public disablePasswordField(): void {
-    this.hasPassword = !this.hasPassword;
-    this.hasPassword
-      ? this.loginForm.get('password')!.enable()
-      : this.loginForm.get('password')!.disable();
+  public showTooltip(): void {
+    const tooltipElement: HTMLElement | null = document.querySelector('.help');
+    const tooltipElementPosition: DOMRect =
+      tooltipElement!.getBoundingClientRect();
+    this.tooltipElement = tooltipElementPosition;
+    this.isTooltipShown = true;
+    this.tooltipService.setTooltipStatus(this.isTooltipShown);
   }
 
-  public logIn(): void {
-    const email = this.loginForm.value.email;
-    const password = this.loginForm.value.password;
-    const authStatus: string = this.authentificateService.login(
-      email,
-      password,
-      this.hasPassword
-    );
-    switch (authStatus) {
-      case 'allow': {
-        this.allowLogIn();
-        break;
-      }
-      case 'forbid': {
-        this.forbidLogIn();
-        break;
-      }
-      case 'setPassword': {
-        this.setPassword();
-        break;
-      }
-    }
+  public hideTooltip(): void {
+    this.isTooltipShown = false;
+    this.tooltipService.setTooltipStatus(this.isTooltipShown);
   }
 }
