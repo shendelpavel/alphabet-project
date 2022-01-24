@@ -11,9 +11,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { AlphabetComponent } from './alphabet/alphabet.component';
+import { LetterComponent } from './letter/letter.component';
 import { LoginGuard } from './guards/login.guard';
 import { LoggedInGuard } from './guards/loggedin.guard';
 import { StudentGuard } from './guards/student.guard';
+import { LetterModule } from './letter/letter.module';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,8 +28,11 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [LoggedInGuard] },
   {
     path: 'alphabet',
-    component: AlphabetComponent,
     canActivate: [LoginGuard, StudentGuard],
+    children: [
+      { path: '', component: AlphabetComponent },
+      { path: 'letter/:id', component: LetterComponent },
+    ],
   },
   { path: '**', component: PageNotFoundComponent },
 ];
@@ -44,6 +49,7 @@ const routes: Routes = [
     SharedModule,
     RegistrationModule,
     LoginModule,
+    LetterModule,
     RouterModule.forRoot(routes),
   ],
   exports: [RouterModule],

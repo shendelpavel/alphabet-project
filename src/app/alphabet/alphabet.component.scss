@@ -44,21 +44,7 @@ $cardContainerSize: $cardSize + $cardExpansion;
   height: $cardSize;
   width: $cardSize;
   border-radius: 10px;
-  background: -webkit-linear-gradient(
-    315deg,
-    rgb(120, 120, 120) 6%,
-    rgb(208, 208, 208) 100%
-  );
-  background: -moz-linear-gradient(
-    315deg,
-    rgb(120, 120, 120) 6%,
-    rgb(208, 208, 208) 100%
-  );
-  background: linear-gradient(
-    315deg,
-    rgb(120, 120, 120) 6%,
-    rgb(208, 208, 208) 100%
-  );
+  border: 1px solid rgba(25, 25, 25, 0.1);
   transition: height 0.2s, width 0.2s;
 }
 
@@ -88,6 +74,6 @@ $cardContainerSize: $cardSize + $cardExpansion;
     box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.4);
   }
   .hover-letter {
-    opacity: 0.4;
+    opacity: 0.1;
   }
 }

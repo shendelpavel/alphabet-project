@@ -1,202 +1,299 @@
-{
-  "alphabet": [
-    {
-      "id": 1,
-      "name": "А, а",
-      "transcription": "[а]",
-      "letterImg": "assets/images-of-letters/1.svg"
-    },
-    {
-      "id": 2,
-      "name": "Б, б",
-      "transcription": "[бэ]",
-      "letterImg": "assets/images-of-letters/2.svg"
-    },
-    {
-      "id": 3,
-      "name": "В, в",
-      "transcription": "[вэ]",
-      "letterImg": "assets/images-of-letters/3.svg"
-    },
-    {
-      "id": 4,
-      "name": "Г, г",
-      "transcription": "[гэ]",
-      "letterImg": "assets/images-of-letters/4.svg"
-    },
-    {
-      "id": 5,
-      "name": "Д, д",
-      "transcription": "[дэ]",
-      "letterImg": "assets/images-of-letters/5.svg"
-    },
-    {
-      "id": 6,
-      "name": "Е, е",
-      "transcription": "[йэ]",
-      "letterImg": "assets/images-of-letters/6.svg"
-    },
-    {
-      "id": 7,
-      "name": "Ё, ё",
-      "transcription": "[йо]",
-      "letterImg": "assets/images-of-letters/7.svg"
-    },
-    {
-      "id": 8,
-      "name": "Ж, ж",
-      "transcription": "[жэ]",
-      "letterImg": "assets/images-of-letters/8.svg"
-    },
-    {
-      "id": 9,
-      "name": "З, з",
-      "transcription": "[зэ]",
-      "letterImg": "assets/images-of-letters/9.svg"
-    },
-    {
-      "id": 10,
-      "name": "И, и",
-      "transcription": "[и]",
-      "letterImg": "assets/images-of-letters/10.svg"
-    },
-    {
-      "id": 11,
-      "name": "Й, й",
-      "transcription": "(и краткое)[й]",
-      "letterImg": "assets/images-of-letters/11.svg"
-    },
-    {
-      "id": 12,
-      "name": "К, к",
-      "transcription": "[ка]",
-      "letterImg": "assets/images-of-letters/12.svg"
-    },
-    {
-      "id": 13,
-      "name": "Л, л",
-      "transcription": "[эл]",
-      "letterImg": "assets/images-of-letters/13.svg"
-    },
-    {
-      "id": 14,
-      "name": "М, м",
-      "transcription": "[эм]",
-      "letterImg": "assets/images-of-letters/14.svg"
-    },
-    {
-      "id": 15,
-      "name": "Н, н",
-      "transcription": "[эн]",
-      "letterImg": "assets/images-of-letters/15.svg"
-    },
-    {
-      "id": 16,
-      "name": "О, о",
-      "transcription": "[о]",
-      "letterImg": "assets/images-of-letters/16.svg"
-    },
-    {
-      "id": 17,
-      "name": "П, п",
-      "transcription": "[пэ]",
-      "letterImg": "assets/images-of-letters/17.svg"
-    },
-    {
-      "id": 18,
-      "name": "Р, р",
-      "transcription": "[эр]",
-      "letterImg": "assets/images-of-letters/18.svg"
-    },
-    {
-      "id": 19,
-      "name": "С, с",
-      "transcription": "[эс]",
-      "letterImg": "assets/images-of-letters/19.svg"
-    },
-    {
-      "id": 20,
-      "name": "Т, т",
-      "transcription": "[тэ]",
-      "letterImg": "assets/images-of-letters/20.svg"
-    },
-    {
-      "id": 21,
-      "name": "У, у",
-      "transcription": "[у]",
-      "letterImg": "assets/images-of-letters/21.svg"
-    },
-    {
-      "id": 22,
-      "name": "Ф, ф",
-      "transcription": "[эф]",
-      "letterImg": "assets/images-of-letters/22.svg"
-    },
-    {
-      "id": 23,
-      "name": "Х, х",
-      "transcription": "[ха]",
-      "letterImg": "assets/images-of-letters/23.svg"
-    },
-    {
-      "id": 24,
-      "name": "Ц, ц",
-      "transcription": "[цэ]",
-      "letterImg": "assets/images-of-letters/24.svg"
-    },
-    {
-      "id": 25,
-      "name": "Ч, ч",
-      "transcription": "[чэ]",
-      "letterImg": "assets/images-of-letters/25.svg"
-    },
-    {
-      "id": 26,
-      "name": "Ш, ш",
-      "transcription": "[ша]",
-      "letterImg": "assets/images-of-letters/26.svg"
-    },
-    {
-      "id": 27,
-      "name": "Щ, щ",
-      "transcription": "[ща]",
-      "letterImg": "assets/images-of-letters/27.svg"
-    },
-    {
-      "id": 28,
-      "name": "Ъ, ъ",
-      "transcription": "(твёрдый знак)",
-      "letterImg": "assets/images-of-letters/28.svg"
-    },
-    {
-      "id": 29,
-      "name": "Ы, ы",
-      "transcription": "[ы]",
-      "letterImg": "assets/images-of-letters/29.svg"
-    },
-    {
-      "id": 30,
-      "name": "Ь, ь",
-      "transcription": "(мягкий знак)",
-      "letterImg": "assets/images-of-letters/30.svg"
-    },
-    {
-      "id": 31,
-      "name": "Э, э",
-      "transcription": "[э]",
-      "letterImg": "assets/images-of-letters/31.svg"
-    },
-    {
-      "id": 32,
-      "name": "Ю, ю",
-      "transcription": "[йу]",
-      "letterImg": "assets/images-of-letters/32.svg"
-    },
-    {
-      "id": 33,
-      "name": "Я, я",
-      "transcription": "[йа]",
-      "letterImg": "assets/images-of-letters/33.svg"
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "name": "А, а",
+    "transcription": "[а]",
+    "letterImg": "assets/images-of-letters/1.svg",
+    "letterSound": "assets/sounds-of-letters/1.mp3",
+    "previousLetterId": 33,
+    "nextLetterId": 2
+  },
+  {
+    "id": 2,
+    "name": "Б, б",
+    "transcription": "[бэ]",
+    "letterImg": "assets/images-of-letters/2.svg",
+    "letterSound": "assets/sounds-of-letters/2.mp3",
+    "previousLetterId": 1,
+    "nextLetterId": 3
+  },
+  {
+    "id": 3,
+    "name": "В, в",
+    "transcription": "[вэ]",
+    "letterImg": "assets/images-of-letters/3.svg",
+    "letterSound": "assets/sounds-of-letters/3.mp3",
+    "previousLetterId": 2,
+    "nextLetterId": 4
+  },
+  {
+    "id": 4,
+    "name": "Г, г",
+    "transcription": "[гэ]",
+    "letterImg": "assets/images-of-letters/4.svg",
+    "letterSound": "assets/sounds-of-letters/4.mp3",
+    "previousLetterId": 3,
+    "nextLetterId": 5
+  },
+  {
+    "id": 5,
+    "name": "Д, д",
+    "transcription": "[дэ]",
+    "letterImg": "assets/images-of-letters/5.svg",
+    "letterSound": "assets/sounds-of-letters/5.mp3",
+    "previousLetterId": 4,
+    "nextLetterId": 6
+  },
+  {
+    "id": 6,
+    "name": "Е, е",
+    "transcription": "[йэ]",
+    "letterImg": "assets/images-of-letters/6.svg",
+    "letterSound": "assets/sounds-of-letters/6.mp3",
+    "previousLetterId": 5,
+    "nextLetterId": 7
+  },
+  {
+    "id": 7,
+    "name": "Ё, ё",
+    "transcription": "[йо]",
+    "letterImg": "assets/images-of-letters/7.svg",
+    "letterSound": "assets/sounds-of-letters/7.mp3",
+    "previousLetterId": 6,
+    "nextLetterId": 8
+  },
+  {
+    "id": 8,
+    "name": "Ж, ж",
+    "transcription": "[жэ]",
+    "letterImg": "assets/images-of-letters/8.svg",
+    "letterSound": "assets/sounds-of-letters/8.mp3",
+    "previousLetterId": 7,
+    "nextLetterId": 9
+  },
+  {
+    "id": 9,
+    "name": "З, з",
+    "transcription": "[зэ]",
+    "letterImg": "assets/images-of-letters/9.svg",
+    "letterSound": "assets/sounds-of-letters/9.mp3",
+    "previousLetterId": 8,
+    "nextLetterId": 10
+  },
+  {
+    "id": 10,
+    "name": "И, и",
+    "transcription": "[и]",
+    "letterImg": "assets/images-of-letters/10.svg",
+    "letterSound": "assets/sounds-of-letters/10.mp3",
+    "previousLetterId": 9,
+    "nextLetterId": 11
+  },
+  {
+    "id": 11,
+    "name": "Й, й",
+    "transcription": "(и краткое)[й]",
+    "letterImg": "assets/images-of-letters/11.svg",
+    "letterSound": "assets/sounds-of-letters/11.mp3",
+    "previousLetterId": 10,
+    "nextLetterId": 12
+  },
+  {
+    "id": 12,
+    "name": "К, к",
+    "transcription": "[ка]",
+    "letterImg": "assets/images-of-letters/12.svg",
+    "letterSound": "assets/sounds-of-letters/12.mp3",
+    "previousLetterId": 11,
+    "nextLetterId": 13
+  },
+  {
+    "id": 13,
+    "name": "Л, л",
+    "transcription": "[эл]",
+    "letterImg": "assets/images-of-letters/13.svg",
+    "letterSound": "assets/sounds-of-letters/13.mp3",
+    "previousLetterId": 12,
+    "nextLetterId": 14
+  },
+  {
+    "id": 14,
+    "name": "М, м",
+    "transcription": "[эм]",
+    "letterImg": "assets/images-of-letters/14.svg",
+    "letterSound": "assets/sounds-of-letters/14.mp3",
+    "previousLetterId": 13,
+    "nextLetterId": 15
+  },
+  {
+    "id": 15,
+    "name": "Н, н",
+    "transcription": "[эн]",
+    "letterImg": "assets/images-of-letters/15.svg",
+    "letterSound": "assets/sounds-of-letters/15.mp3",
+    "previousLetterId": 14,
+    "nextLetterId": 16
+  },
+  {
+    "id": 16,
+    "name": "О, о",
+    "transcription": "[о]",
+    "letterImg": "assets/images-of-letters/16.svg",
+    "letterSound": "assets/sounds-of-letters/16.mp3",
+    "previousLetterId": 15,
+    "nextLetterId": 17
+  },
+  {
+    "id": 17,
+    "name": "П, п",
+    "transcription": "[пэ]",
+    "letterImg": "assets/images-of-letters/17.svg",
+    "letterSound": "assets/sounds-of-letters/17.mp3",
+    "previousLetterId": 16,
+    "nextLetterId": 18
+  },
+  {
+    "id": 18,
+    "name": "Р, р",
+    "transcription": "[эр]",
+    "letterImg": "assets/images-of-letters/18.svg",
+    "letterSound": "assets/sounds-of-letters/18.mp3",
+    "previousLetterId": 17,
+    "nextLetterId": 19
+  },
+  {
+    "id": 19,
+    "name": "С, с",
+    "transcription": "[эс]",
+    "letterImg": "assets/images-of-letters/19.svg",
+    "letterSound": "assets/sounds-of-letters/19.mp3",
+    "previousLetterId": 18,
+    "nextLetterId": 20
+  },
+  {
+    "id": 20,
+    "name": "Т, т",
+    "transcription": "[тэ]",
+    "letterImg": "assets/images-of-letters/20.svg",
+    "letterSound": "assets/sounds-of-letters/20.mp3",
+    "previousLetterId": 19,
+    "nextLetterId": 21
+  },
+  {
+    "id": 21,
+    "name": "У, у",
+    "transcription": "[у]",
+    "letterImg": "assets/images-of-letters/21.svg",
+    "letterSound": "assets/sounds-of-letters/21.mp3",
+    "previousLetterId": 20,
+    "nextLetterId": 22
+  },
+  {
+    "id": 22,
+    "name": "Ф, ф",
+    "transcription": "[эф]",
+    "letterImg": "assets/images-of-letters/22.svg",
+    "letterSound": "assets/sounds-of-letters/22.mp3",
+    "previousLetterId": 21,
+    "nextLetterId": 23
+  },
+  {
+    "id": 23,
+    "name": "Х, х",
+    "transcription": "[ха]",
+    "letterImg": "assets/images-of-letters/23.svg",
+    "letterSound": "assets/sounds-of-letters/23.mp3",
+    "previousLetterId": 22,
+    "nextLetterId": 24
+  },
+  {
+    "id": 24,
+    "name": "Ц, ц",
+    "transcription": "[цэ]",
+    "letterImg": "assets/images-of-letters/24.svg",
+    "letterSound": "assets/sounds-of-letters/24.mp3",
+    "previousLetterId": 23,
+    "nextLetterId": 25
+  },
+  {
+    "id": 25,
+    "name": "Ч, ч",
+    "transcription": "[чэ]",
+    "letterImg": "assets/images-of-letters/25.svg",
+    "letterSound": "assets/sounds-of-letters/25.mp3",
+    "previousLetterId": 24,
+    "nextLetterId": 26
+  },
+  {
+    "id": 26,
+    "name": "Ш, ш",
+    "transcription": "[ша]",
+    "letterImg": "assets/images-of-letters/26.svg",
+    "letterSound": "assets/sounds-of-letters/26.mp3",
+    "previousLetterId": 25,
+    "nextLetterId": 27
+  },
+  {
+    "id": 27,
+    "name": "Щ, щ",
+    "transcription": "[ща]",
+    "letterImg": "assets/images-of-letters/27.svg",
+    "letterSound": "assets/sounds-of-letters/27.mp3",
+    "previousLetterId": 26,
+    "nextLetterId": 28
+  },
+  {
+    "id": 28,
+    "name": "Ъ, ъ",
+    "transcription": "(твёрдый знак)",
+    "letterImg": "assets/images-of-letters/28.svg",
+    "letterSound": "assets/sounds-of-letters/28.mp3",
+    "previousLetterId": 27,
+    "nextLetterId": 29
+  },
+  {
+    "id": 29,
+    "name": "Ы, ы",
+    "transcription": "[ы]",
+    "letterImg": "assets/images-of-letters/29.svg",
+    "letterSound": "assets/sounds-of-letters/29.mp3",
+    "previousLetterId": 28,
+    "nextLetterId": 30
+  },
+  {
+    "id": 30,
+    "name": "Ь, ь",
+    "transcription": "(мягкий знак)",
+    "letterImg": "assets/images-of-letters/30.svg",
+    "letterSound": "assets/sounds-of-letters/30.mp3",
+    "previousLetterId": 29,
+    "nextLetterId": 31
+  },
+  {
+    "id": 31,
+    "name": "Э, э",
+    "transcription": "[э]",
+    "letterImg": "assets/images-of-letters/31.svg",
+    "letterSound": "assets/sounds-of-letters/31.mp3",
+    "previousLetterId": 30,
+    "nextLetterId": 32
+  },
+  {
+    "id": 32,
+    "name": "Ю, ю",
+    "transcription": "[йу]",
+    "letterImg": "assets/images-of-letters/32.svg",
+    "letterSound": "assets/sounds-of-letters/32.mp3",
+    "previousLetterId": 31,
+    "nextLetterId": 33
+  },
+  {
+    "id": 33,
+    "name": "Я, я",
+    "transcription": "[йа]",
+    "letterImg": "assets/images-of-letters/33.svg",
+    "letterSound": "assets/sounds-of-letters/33.mp3",
+    "previousLetterId": 32,
+    "nextLetterId": 1
+  }
+]

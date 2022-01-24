@@ -1,5 +1,14 @@
 import { Component } from '@angular/core';
-import * as AlphabetModule from 'src/assets/letters-data.json';
+import LettersData from 'src/assets/letters-data.json';
+interface Letter {
+  id: number;
+  name: string;
+  transcription: string;
+  letterImg: string;
+  letterSound: string;
+  previousLetterId: number;
+  nextLetterId: number;
+}
 
 @Component({
   selector: 'app-alphabet',
@@ -7,9 +16,5 @@ import * as AlphabetModule from 'src/assets/letters-data.json';
   styleUrls: ['./alphabet.component.scss'],
 })
 export class AlphabetComponent {
-  private alphabetModule = AlphabetModule;
-  public alphabet = this.alphabetModule.alphabet;
-  test() {
-    console.log(this.alphabet);
-  }
+  public alphabet: Letter[] = LettersData;
 }
