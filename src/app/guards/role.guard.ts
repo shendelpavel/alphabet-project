@@ -9,17 +9,18 @@ import { AuthentificateService } from '../services/authentificate.service';
 @Injectable({
   providedIn: 'root',
 })
-export class StudentGuard implements CanActivate {
+export class RoleGuard implements CanActivate {
   constructor(private authentificateService: AuthentificateService) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    if (this.authentificateService.getRole() === 'student') {
+    const role = route.data['role'] as string;
+    if (this.authentificateService.getRole() === role) {
       return true;
     } else {
-      alert('You must be registered as a student to visit this page!');
+      alert(`You must be registered as a ${role} to visit this page!`);
       return false;
     }
   }

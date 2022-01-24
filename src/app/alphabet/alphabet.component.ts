@@ -9,7 +9,4 @@ import * as AlphabetModule from 'src/assets/letters-data.json';
 export class AlphabetComponent {
   private alphabetModule = AlphabetModule;
   public alphabet = this.alphabetModule.alphabet;
-  test() {
-    console.log(this.alphabet);
-  }
 }

@@ -13,7 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { AlphabetComponent } from './alphabet/alphabet.component';
 import { LoginGuard } from './guards/login.guard';
 import { LoggedInGuard } from './guards/loggedin.guard';
-import { StudentGuard } from './guards/student.guard';
+import { RoleGuard } from './guards/role.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,7 +27,8 @@ const routes: Routes = [
   {
     path: 'alphabet',
     component: AlphabetComponent,
-    canActivate: [LoginGuard, StudentGuard],
+    canActivate: [LoginGuard, RoleGuard],
+    data: { role: 'student' },
   },
   { path: '**', component: PageNotFoundComponent },
 ];
