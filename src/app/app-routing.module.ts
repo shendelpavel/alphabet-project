@@ -15,6 +15,9 @@ import { LoginGuard } from './guards/login.guard';
 import { LoggedInGuard } from './guards/loggedin.guard';
 import { RoleGuard } from './guards/role.guard';
 
+const STUDENT_ROLE: string = 'student';
+const PARENT_ROLE: string = 'parent';
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contacts', component: ContactsComponent, canActivate: [LoginGuard] },
@@ -28,7 +31,7 @@ const routes: Routes = [
     path: 'alphabet',
     component: AlphabetComponent,
     canActivate: [LoginGuard, RoleGuard],
-    data: { role: 'student' },
+    data: { role: STUDENT_ROLE },
   },
   { path: '**', component: PageNotFoundComponent },
 ];
