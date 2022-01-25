@@ -1,14 +1,6 @@
 import { Component } from '@angular/core';
 import LettersData from 'src/assets/letters-data.json';
-interface Letter {
-  id: number;
-  name: string;
-  transcription: string;
-  letterImg: string;
-  letterSound: string;
-  previousLetterId: number;
-  nextLetterId: number;
-}
+import { Letter } from '../services/shared/letter.model';
 
 @Component({
   selector: 'app-alphabet',

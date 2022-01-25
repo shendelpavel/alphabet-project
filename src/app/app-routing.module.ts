@@ -14,8 +14,11 @@ import { AlphabetComponent } from './alphabet/alphabet.component';
 import { LetterComponent } from './letter/letter.component';
 import { LoginGuard } from './guards/login.guard';
 import { LoggedInGuard } from './guards/loggedin.guard';
-import { StudentGuard } from './guards/student.guard';
 import { LetterModule } from './letter/letter.module';
+import { RoleGuard } from './guards/role.guard';
+
+const STUDENT_ROLE: string = 'student';
+const PARENT_ROLE: string = 'parent';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,7 +31,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [LoggedInGuard] },
   {
     path: 'alphabet',
-    canActivate: [LoginGuard, StudentGuard],
+    canActivate: [LoginGuard, RoleGuard],
+    data: { role: STUDENT_ROLE },
     children: [
       { path: '', component: AlphabetComponent },
       { path: 'letter/:id', component: LetterComponent },
