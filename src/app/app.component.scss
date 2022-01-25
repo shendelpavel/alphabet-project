@@ -1,12 +1,19 @@
+$footerHeight: 64px;
+
 .page {
   height: 100vh;
 }
 
 .container {
+  height: calc(100vh - $footerHeight);
+  overflow-y: scroll;
+}
+
+.media {
+  margin-right: calc(-1 * (100vw - 100%));
+  height: 100%;
   display: flex;
   flex-direction: column;
-  height: 94.2vh;
-  overflow-y: scroll;
 }
 
 .content {

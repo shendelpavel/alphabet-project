@@ -2,6 +2,7 @@ $cardHeight: 720px;
 $cardWidth: 1080px;
 $cardExpansion: 30px;
 $cardContainerHeight: $cardHeight + $cardExpansion;
+$cardContainerWidth: $cardWidth + $cardExpansion;
 
 .container {
   width: 100%;
@@ -146,7 +147,32 @@ $cardContainerHeight: $cardHeight + $cardExpansion;
 
 .card:hover {
   cursor: pointer;
-  height: $cardHeight + $cardExpansion;
-  width: $cardWidth + $cardExpansion;
+  height: $cardContainerHeight;
+  width: $cardContainerWidth;
   box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.4);
+
+  @media (max-width: 1439px) {
+    height: $cardContainerHeight - 100px;
+    width: $cardContainerWidth - 100px;
+  }
+
+  @media (max-width: 1023px) {
+    height: $cardContainerHeight - 350px;
+    width: $cardContainerWidth - 350px;
+  }
+
+  @media (max-width: 767px) {
+    height: $cardContainerHeight - 450px;
+    width: $cardContainerWidth - 700px;
+  }
+
+  @media (max-width: 424px) {
+    height: $cardContainerHeight - 500px;
+    width: $cardContainerWidth - 750px;
+  }
+
+  @media (max-width: 374px) {
+    height: $cardContainerHeight - 500px;
+    width: $cardContainerWidth - 800px;
+  }
 }

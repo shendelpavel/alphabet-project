@@ -1,0 +1,93 @@
+$cardSize: 250px;
+$cardExpansion: 10px;
+$cardContainerSize: $cardSize + $cardExpansion;
+
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+.alphabet {
+  padding: 37px 30px;
+  max-width: 1440px;
+}
+
+.alphabet-title {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(25, 25, 25, 0.1);
+  margin-bottom: 23px;
+  h1 {
+    margin: 0;
+  }
+}
+
+.alphabet-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  height: $cardContainerSize;
+  width: $cardContainerSize;
+  margin: 20px;
+}
+
+.card {
+  height: $cardSize;
+  width: $cardSize;
+  border-radius: 10px;
+  background: -webkit-linear-gradient(
+    315deg,
+    rgb(120, 120, 120) 6%,
+    rgb(208, 208, 208) 100%
+  );
+  background: -moz-linear-gradient(
+    315deg,
+    rgb(120, 120, 120) 6%,
+    rgb(208, 208, 208) 100%
+  );
+  background: linear-gradient(
+    315deg,
+    rgb(120, 120, 120) 6%,
+    rgb(208, 208, 208) 100%
+  );
+  transition: height 0.2s, width 0.2s;
+}
+
+.letter-image {
+  width: 100%;
+  height: 100%;
+}
+
+.hover-letter {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: $cardContainerSize;
+  width: $cardContainerSize;
+  border-radius: 10px;
+  overflow: hidden;
+  opacity: 0;
+  background-color: black;
+  transition: opacity 0.6s;
+}
+
+.card-container:hover {
+  cursor: pointer;
+  .card {
+    height: $cardSize + $cardExpansion;
+    width: $cardSize + $cardExpansion;
+    box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.4);
+  }
+  .hover-letter {
+    opacity: 0.4;
+  }
+}
