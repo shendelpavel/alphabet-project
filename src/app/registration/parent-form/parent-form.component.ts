@@ -37,9 +37,9 @@ export class ParentFormComponent implements OnInit {
   private addedExistingStudents!: FormArray;
 
   constructor(
-    public dialog: MatDialog,
-    private dataService: DataService,
-    private formBuilder: FormBuilder
+    public readonly dialog: MatDialog,
+    private readonly dataService: DataService,
+    private readonly formBuilder: FormBuilder
   ) {
     this.parentForm = this.formBuilder.group(
       {
@@ -106,7 +106,9 @@ export class ParentFormComponent implements OnInit {
   }
 
   public editNewStudent(index: number): void {
-    const dialogRef = this.dialog.open(DialogAddNewStudent);
+    const dialogRef = this.dialog.open(DialogAddNewStudent, {
+      data: { student: this.addedNewStudents.at(index).value },
+    });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.addedNewStudents = this.newStudentsList;
@@ -131,7 +133,9 @@ export class ParentFormComponent implements OnInit {
   }
 
   public editExistingStudent(index: number): void {
-    const dialogRef = this.dialog.open(DialogAddExistingStudent);
+    const dialogRef = this.dialog.open(DialogAddExistingStudent, {
+      data: { student: this.addedExistingStudents.at(index).value },
+    });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.addedExistingStudents = this.existingStudentsList;

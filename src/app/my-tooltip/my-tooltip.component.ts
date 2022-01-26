@@ -10,8 +10,8 @@ export class MyTooltipComponent implements OnInit {
   @Input() tooltipElement!: DOMRect;
 
   constructor(
-    private tooltipService: TooltipService,
-    private renderer: Renderer2
+    private readonly tooltipService: TooltipService,
+    private readonly renderer: Renderer2
   ) {}
 
   ngOnInit(): void {

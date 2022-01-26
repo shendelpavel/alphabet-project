@@ -19,8 +19,8 @@ export class DialogSetPassword {
   public setPasswordForm!: FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<DialogSetPassword>,
-    private formBuilder: FormBuilder
+    public readonly dialogRef: MatDialogRef<DialogSetPassword>,
+    private readonly formBuilder: FormBuilder
   ) {
     this.setPasswordForm = this.formBuilder.group(
       {

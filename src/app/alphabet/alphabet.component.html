@@ -4,7 +4,6 @@
     <div
       class="card-container"
       *ngFor="let letter of alphabet"
-      [title]="letter.name + ' details'"
       [routerLink]="['letter', letter.id]"
     >
       <div class="card">

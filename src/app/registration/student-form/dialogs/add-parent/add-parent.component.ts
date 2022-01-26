@@ -1,14 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
   Validators,
   FormControl,
 } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EMAIL_PATTERN_REGEX } from 'src/app/registration/regular-expressions';
 import { EmailExistenceValidator } from 'src/app/registration/validators/email-existence.validator';
 import { DataService } from 'src/app/services/data.service';
+import { Parent } from 'src/app/services/shared/user.model';
+
+interface DialogData {
+  parent: Parent;
+}
 
 @Component({
   selector: 'dialog-add-parent',
@@ -18,14 +23,15 @@ export class DialogAddParent {
   public parentForm!: FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<DialogAddParent>,
-    private dataService: DataService,
-    private formBuilder: FormBuilder
+    public readonly dialogRef: MatDialogRef<DialogAddParent>,
+    private readonly dataService: DataService,
+    private readonly formBuilder: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public readonly data?: DialogData
   ) {
     this.parentForm = this.formBuilder.group(
       {
         email: [
-          '',
+          data?.parent.email || '',
           [Validators.required, Validators.pattern(EMAIL_PATTERN_REGEX)],
         ],
       },
