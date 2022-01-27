@@ -7,9 +7,10 @@ import {
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EMAIL_PATTERN_REGEX } from 'src/app/registration/regular-expressions';
-import { EmailExistenceValidator } from 'src/app/registration/validators/email-existence.validator';
+import { AddedUserExistsValidator } from 'src/app/registration/validators/added-user-exists.validator';
 import { DataService } from 'src/app/services/data.service';
 import { Parent } from 'src/app/services/shared/user.model';
+import { UserStatus } from 'src/app/services/shared/user-status';
 
 interface DialogData {
   parent: Parent;
@@ -36,8 +37,9 @@ export class DialogAddParent {
         ],
       },
       {
-        validator: EmailExistenceValidator(
+        validator: AddedUserExistsValidator(
           'email',
+          UserStatus.Parent,
           this.dataService.getUserData
         ),
       }

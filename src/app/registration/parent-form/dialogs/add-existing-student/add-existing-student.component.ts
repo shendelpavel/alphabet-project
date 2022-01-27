@@ -8,8 +8,9 @@ import {
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EMAIL_PATTERN_REGEX } from 'src/app/registration/regular-expressions';
 import { DataService } from 'src/app/services/data.service';
+import { UserStatus } from 'src/app/services/shared/user-status';
 import { Student } from 'src/app/services/shared/user.model';
-import { EmailExistenceValidator } from '../../../validators/email-existence.validator';
+import { AddedUserExistsValidator } from 'src/app/registration/validators/added-user-exists.validator';
 
 interface DialogData {
   student: Student;
@@ -36,8 +37,9 @@ export class DialogAddExistingStudent {
         ],
       },
       {
-        validator: EmailExistenceValidator(
+        validator: AddedUserExistsValidator(
           'email',
+          UserStatus.Student,
           this.dataService.getUserData
         ),
       }
