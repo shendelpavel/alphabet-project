@@ -3,4 +3,7 @@ export interface Letter {
   name: string;
   transcription: string;
   letterImg: string;
+  letterSound: string;
+  previousLetterId: number;
+  nextLetterId: number;
 }

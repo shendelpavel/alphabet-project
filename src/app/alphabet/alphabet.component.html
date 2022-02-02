@@ -4,8 +4,7 @@
     <div
       class="card-container"
       *ngFor="let letter of alphabet"
-      [title]="letter.name + ' details'"
-      [routerLink]="['/letters', letter.id]"
+      [routerLink]="['letter', letter.id]"
     >
       <div class="card">
         <img class="letter-image" [src]="letter.letterImg" />

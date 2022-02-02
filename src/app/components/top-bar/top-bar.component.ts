@@ -10,7 +10,7 @@ export class TopBarComponent implements OnInit {
   public isMenuShown: boolean = false;
   public isLoggedIn?: boolean;
 
-  constructor(private authentificateService: AuthentificateService) {}
+  constructor(private readonly authentificateService: AuthentificateService) {}
 
   ngOnInit(): void {
     this.authentificateService.currentIsLoggedIn$.subscribe(

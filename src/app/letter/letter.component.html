@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="button-container">
+    <div>
+      <button
+        mat-mini-fab
+        color="warn"
+        [routerLink]="['/alphabet/letter', letter?.previousLetterId]"
+      >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+    <div>
+      <button mat-raised-button color="primary" routerLink="/alphabet">
+        Alphabet
+      </button>
+    </div>
+    <div>
+      <button mat-mini-fab color="warn" (click)="nextLetter()">
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="letter">
+    <div class="letter-left">
+      <img class="letter-image" [src]="letter?.letterImg" />
+    </div>
+    <div class="letter-right">
+      <h1 class="letter-name">Letter name: {{ letter?.name }}</h1>
+      <div>
+        <div class="letter-transcription">
+          <h2>Transcription: {{ letter?.transcription }}</h2>
+          <audio-player [audio]="letter?.letterSound || ''"></audio-player>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

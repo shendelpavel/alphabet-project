@@ -1,0 +1,21 @@
+<div class="audio-player">
+  <button
+    mat-mini-fab
+    *ngIf="!isPlaying"
+    color="warn"
+    aria-label="Example icon button with a filter list icon"
+    (click)="play()"
+  >
+    <mat-icon>play_arrow</mat-icon>
+  </button>
+  <button
+    mat-mini-fab
+    *ngIf="isPlaying"
+    color="primary"
+    aria-label="Example icon button with a filter list icon"
+    (click)="pause()"
+  >
+    <mat-icon>pause</mat-icon>
+  </button>
+  <div class="waveform"><div id="waveform"></div></div>
+</div>

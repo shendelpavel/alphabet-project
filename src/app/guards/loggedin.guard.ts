@@ -10,7 +10,7 @@ import { AuthentificateService } from '../services/authentificate.service';
   providedIn: 'root',
 })
 export class LoggedInGuard implements CanActivate {
-  constructor(private authentificateService: AuthentificateService) {}
+  constructor(private readonly authentificateService: AuthentificateService) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,

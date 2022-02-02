@@ -13,8 +13,8 @@ import { AuthentificateService } from '../services/authentificate.service';
 })
 export class LoginGuard implements CanActivate {
   constructor(
-    private authentificateService: AuthentificateService,
-    private router: Router
+    private readonly authentificateService: AuthentificateService,
+    private readonly router: Router
   ) {}
 
   canActivate(

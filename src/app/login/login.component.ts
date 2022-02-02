@@ -36,12 +36,12 @@ export class LoginComponent {
   };
 
   constructor(
-    public dialog: MatDialog,
-    private tooltipService: TooltipService,
-    private router: Router,
-    private snackBar: MatSnackBar,
-    private authentificateService: AuthentificateService,
-    private formBuilder: FormBuilder
+    public readonly dialog: MatDialog,
+    private readonly tooltipService: TooltipService,
+    private readonly router: Router,
+    private readonly snackBar: MatSnackBar,
+    private readonly authentificateService: AuthentificateService,
+    private readonly formBuilder: FormBuilder
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required]],

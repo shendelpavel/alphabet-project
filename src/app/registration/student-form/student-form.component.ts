@@ -34,9 +34,9 @@ export class StudentFormComponent implements OnInit {
   private addedParents!: FormArray;
 
   constructor(
-    public dialog: MatDialog,
-    private dataService: DataService,
-    private formBuilder: FormBuilder
+    public readonly dialog: MatDialog,
+    private readonly dataService: DataService,
+    private readonly formBuilder: FormBuilder
   ) {
     this.studentForm = this.formBuilder.group(
       {
@@ -98,7 +98,9 @@ export class StudentFormComponent implements OnInit {
   }
 
   public editParent(index: number): void {
-    const dialogRef = this.dialog.open(DialogAddParent);
+    const dialogRef = this.dialog.open(DialogAddParent, {
+      data: { parent: this.addedParents.at(index).value },
+    });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.addedParents = this.parentsList;
