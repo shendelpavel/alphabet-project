@@ -11,11 +11,11 @@ $maxTooltipWidth: 258px;
   font-size: 15px;
   color: #fff;
   border-radius: 10px;
-  background: rgb(103, 58, 183);
+  background: #673ab7;
   background: linear-gradient(
     79deg,
-    rgba(103, 58, 183, 1) 20%,
-    rgba(244, 67, 54, 1) 80%
+    #673ab7 20%,
+    #f44336 80%
   );
 
   .tooltip-content {

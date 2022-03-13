@@ -12,13 +12,13 @@ $cardContainerWidth: $cardWidth + $cardExpansion;
 
 .block-text {
   padding: 129px 0px;
-  border-bottom: 1px solid rgba(25, 25, 25, 0.1);
+  border-bottom: 1px solid #e8e8e8;
 
-  @media (max-width: 767px) {
+  @media ( max-width: 767px ) {
     padding: 89px 0px;
   }
 
-  @media (max-width: 424px) {
+  @media ( max-width: 424px ) {
     padding: 49px 0px;
   }
 }
@@ -43,46 +43,46 @@ $cardContainerWidth: $cardWidth + $cardExpansion;
 }
 
 .project-cards {
+  position: relative;
+  display: flex;
   padding: 50px 0px;
   box-sizing: border-box;
-  display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
 }
 
 .card {
+  display: flex;
   height: $cardHeight;
   width: $cardWidth;
-  display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  color: rgb(255, 250, 242);
+  color: #fffaf2;
   border-radius: 10px;
   transition: all 0.2s;
 
-  @media (max-width: 1439px) {
+  @media ( max-width: 1439px ) {
     height: $cardHeight - 100px;
     width: $cardWidth - 100px;
   }
 
-  @media (max-width: 1023px) {
+  @media ( max-width: 1023px ) {
     height: $cardHeight - 350px;
     width: $cardWidth - 350px;
   }
 
-  @media (max-width: 767px) {
+  @media ( max-width: 767px ) {
     height: $cardHeight - 450px;
     width: $cardWidth - 700px;
   }
 
-  @media (max-width: 424px) {
+  @media ( max-width: 424px ) {
     height: $cardHeight - 500px;
     width: $cardWidth - 750px;
   }
 
-  @media (max-width: 374px) {
+  @media ( max-width: 374px ) {
     height: $cardHeight - 500px;
     width: $cardWidth - 800px;
   }
@@ -92,19 +92,19 @@ $cardContainerWidth: $cardWidth + $cardExpansion;
   height: $cardContainerHeight;
   margin-top: 35px;
 
-  @media (max-width: 1439px) {
+  @media ( max-width: 1439px ) {
     height: $cardContainerHeight - 100px;
   }
 
-  @media (max-width: 1023px) {
+  @media ( max-width: 1023px ) {
     height: $cardContainerHeight - 350px;
   }
 
-  @media (max-width: 767px) {
+  @media ( max-width: 767px ) {
     height: $cardContainerHeight - 450px;
   }
 
-  @media (max-width: 424px) {
+  @media ( max-width: 424px ) {
     height: $cardContainerHeight - 525px;
   }
 }
@@ -112,36 +112,36 @@ $cardContainerWidth: $cardWidth + $cardExpansion;
 .project-1-card {
   background: -webkit-linear-gradient(
     315deg,
-    rgb(120, 120, 120) 6%,
-    rgb(208, 208, 208) 100%
+    #e3e3e3 6%,
+    #d0d0d0 100%
   );
   background: -moz-linear-gradient(
     315deg,
-    rgb(120, 120, 120) 6%,
-    rgb(208, 208, 208) 100%
+    #e3e3e3 6%,
+    #d0d0d0 100%
   );
   background: linear-gradient(
     315deg,
-    rgb(120, 120, 120) 6%,
-    rgb(208, 208, 208) 100%
+    #e3e3e3 6%,
+    #d0d0d0 100%
   );
 }
 
 .project-2-card {
   background: -webkit-linear-gradient(
     315deg,
-    rgb(120, 120, 120) 6%,
-    rgb(208, 208, 208) 100%
+    #e3e3e3 6%,
+    #d0d0d0 100%
   );
   background: -moz-linear-gradient(
     315deg,
-    rgb(120, 120, 120) 6%,
-    rgb(208, 208, 208) 100%
+    #e3e3e3 6%,
+    #d0d0d0 100%
   );
   background: linear-gradient(
     315deg,
-    rgb(120, 120, 120) 6%,
-    rgb(208, 208, 208) 100%
+    #e3e3e3 6%,
+    #d0d0d0 100%
   );
 }
 
@@ -149,29 +149,29 @@ $cardContainerWidth: $cardWidth + $cardExpansion;
   cursor: pointer;
   height: $cardContainerHeight;
   width: $cardContainerWidth;
-  box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 0 5px 30px 0 #999999;
 
-  @media (max-width: 1439px) {
+  @media ( max-width: 1439px ) {
     height: $cardContainerHeight - 100px;
     width: $cardContainerWidth - 100px;
   }
 
-  @media (max-width: 1023px) {
+  @media ( max-width: 1023px ) {
     height: $cardContainerHeight - 350px;
     width: $cardContainerWidth - 350px;
   }
 
-  @media (max-width: 767px) {
+  @media ( max-width: 767px ) {
     height: $cardContainerHeight - 450px;
     width: $cardContainerWidth - 700px;
   }
 
-  @media (max-width: 424px) {
+  @media ( max-width: 424px ) {
     height: $cardContainerHeight - 500px;
     width: $cardContainerWidth - 750px;
   }
 
-  @media (max-width: 374px) {
+  @media ( max-width: 374px ) {
     height: $cardContainerHeight - 500px;
     width: $cardContainerWidth - 800px;
   }

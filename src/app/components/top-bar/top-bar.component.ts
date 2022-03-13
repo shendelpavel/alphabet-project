@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthentificateService } from '../../services/authentificate.service';
+import { Component, OnInit } from "@angular/core";
+
+import { AuthentificateService } from "../../services/authentificate.service";
 
 @Component({
-  selector: 'app-top-bar',
-  templateUrl: './top-bar.component.html',
-  styleUrls: ['./top-bar.component.scss'],
+  selector: "ap-top-bar",
+  templateUrl: "./top-bar.component.html",
+  styleUrls: [ "./top-bar.component.scss" ]
 })
 export class TopBarComponent implements OnInit {
   public isMenuShown: boolean = false;
@@ -12,9 +13,9 @@ export class TopBarComponent implements OnInit {
 
   constructor(private readonly authentificateService: AuthentificateService) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.authentificateService.currentIsLoggedIn$.subscribe(
-      (isLoggedIn) => (this.isLoggedIn = isLoggedIn)
+      isLoggedIn => (this.isLoggedIn = isLoggedIn)
     );
   }
 

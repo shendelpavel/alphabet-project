@@ -1,0 +1,23 @@
+.task {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+}
+
+.task-form {
+  text-align: center;
+}
+
+mat-form-field.mat-form-field {
+  font-size: 17px;
+}
+
+.task-container {
+  width: 900px;
+  height: 720px;
+  border: 1px solid rgba(25, 25, 25, 0.1);
+  border-radius: 10px;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+}

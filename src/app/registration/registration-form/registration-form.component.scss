@@ -12,8 +12,9 @@
 .form-title {
   text-align: center;
   padding-bottom: 15px;
-  border-bottom: 1px solid rgba(25, 25, 25, 0.1);
+  border-bottom: 1px solid #e8e8e8;
   margin-bottom: 23px;
+
   h1 {
     margin: 0;
   }
@@ -22,56 +23,57 @@
 .basic-form ::ng-deep .mat-form-field {
   width: 210px;
   font-size: 17px;
+
   .mat-form-field-flex {
     background-color: transparent;
   }
 
-  @media (max-width: 767px) {
+  @media ( max-width: 767px ) {
     font-size: 14px;
   }
 
-  @media (max-width: 374px) {
+  @media ( max-width: 374px ) {
     width: 190px;
   }
 
-  @media (max-width: 344px) {
+  @media ( max-width: 344px ) {
     width: 165px;
   }
 }
 
 .basic-form ::ng-deep .mat-button {
-  @media (max-width: 374px) {
+  @media ( max-width: 374px ) {
     font-size: 13px;
   }
 }
 
-.student-list {
+.user-list {
   margin-top: 15px;
   max-height: 0px;
   transition: max-height 0.4s;
 }
 
-.show-student-list {
+.show-user-list {
   max-height: 80px;
   width: 720px;
 
-  @media (max-width: 1439px) {
+  @media ( max-width: 1439px ) {
     width: 265px;
   }
 
-  @media (max-width: 424px) {
+  @media ( max-width: 424px ) {
     width: 205px;
   }
 }
 
-.student-list-overflow {
+.user-list-overflow {
   max-height: 80px;
   overflow-y: auto;
   overflow-x: auto;
 }
 
 .done-step-title {
-  @media (max-width: 1439px) {
+  @media ( max-width: 1439px ) {
     text-align: center;
   }
 }

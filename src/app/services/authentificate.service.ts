@@ -1,20 +1,24 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { DataService } from './data.service';
-import { AuthStatus } from './shared/auth-status';
+import { Injectable } from "@angular/core";
 
-@Injectable({ providedIn: 'root' })
+import { BehaviorSubject } from "rxjs";
+
+import { AuthStatus } from "./shared/auth-status";
+import { DataService } from "./data.service";
+import { User } from "./shared/user.model";
+
+@Injectable({ providedIn: "root" })
 export class AuthentificateService {
-  private authStatus: AuthStatus = AuthStatus.Forbid;
-  private userData: any;
-  private isLoggedIn = new BehaviorSubject(false);
-  currentIsLoggedIn$ = this.isLoggedIn.asObservable();
-  private role = new BehaviorSubject('');
-  currentRole = this.role.asObservable();
-  private email = new BehaviorSubject('');
-  currentEmail = this.email.asObservable();
+  public isLoggedIn = new BehaviorSubject(false);
+  public currentIsLoggedIn$ = this.isLoggedIn.asObservable();
+  public role = new BehaviorSubject("");
+  public currentRole = this.role.asObservable();
+  public email = new BehaviorSubject("");
+  public currentEmail = this.email.asObservable();
 
-  constructor(private dataService: DataService) {}
+  private authStatus: AuthStatus = AuthStatus.Forbid;
+  private userData!: User;
+
+  constructor(private readonly dataService: DataService) {}
 
   public login(email: string, password: string): AuthStatus {
     const jsonUserData = this.checkEmail(email);
@@ -35,18 +39,16 @@ export class AuthentificateService {
 
   public setLogOutStatus(): void {
     this.userData!.isLoggedIn = false;
-    this.userData.role === 'parent'
-      ? this.dataService.setParentData(this.userData)
-      : this.dataService.setStudentData(this.userData);
+    this.dataService.setUserData(this.userData);
   }
 
   public clearSessionData(): void {
     this.setStatus(false);
-    this.setRole('');
-    this.setEmail('');
+    this.setRole("");
+    this.setEmail("");
   }
 
-  public logOut() {
+  public logOut(): void {
     this.setLogOutStatus();
     this.clearSessionData();
   }
@@ -93,9 +95,7 @@ export class AuthentificateService {
 
   private setLogInStatus(): void {
     this.userData!.isLoggedIn = true;
-    this.userData.role === 'parent'
-      ? this.dataService.setParentData(this.userData)
-      : this.dataService.setStudentData(this.userData);
+    this.dataService.setUserData(this.userData);
   }
 
   private setSessionData(): void {

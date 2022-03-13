@@ -1,30 +1,27 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SharedModule } from '../shared/shared.module';
-import { RegistrationComponent } from './registration.component';
-import { ParentFormComponent } from './parent-form/parent-form.component';
-import { DialogAddNewStudent } from './parent-form/dialogs/add-new-student/add-new-student.component';
-import { DialogAddExistingStudent } from './parent-form/dialogs/add-existing-student/add-existing-student.component';
-import { StudentFormComponent } from './student-form/student-form.component';
-import { DialogAddParent } from './student-form/dialogs/add-parent/add-parent.component';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+
+import { SharedModule } from "../shared/shared.module";
+
+import { DialogCreateNewUserComponent } from "./registration-form/dialogs/create-new-user/dialog-create-new-user.component";
+import { DialogInputComponent } from "./registration-form/dialogs/input/dialog-input.component";
+import { RegistrationComponent } from "./registration.component";
+import { RegistrationFormComponent } from "./registration-form/registration-form.component";
+
 
 @NgModule({
   declarations: [
     RegistrationComponent,
-    ParentFormComponent,
-    StudentFormComponent,
-    DialogAddParent,
-    DialogAddNewStudent,
-    DialogAddExistingStudent,
+    RegistrationFormComponent,
+    DialogCreateNewUserComponent,
+    DialogInputComponent
   ],
-  imports: [CommonModule, SharedModule],
+  imports: [ CommonModule, SharedModule ],
   exports: [
     RegistrationComponent,
-    ParentFormComponent,
-    StudentFormComponent,
-    DialogAddParent,
-    DialogAddNewStudent,
-    DialogAddExistingStudent,
-  ],
+    RegistrationFormComponent,
+    DialogCreateNewUserComponent,
+    DialogInputComponent
+  ]
 })
 export class RegistrationModule {}

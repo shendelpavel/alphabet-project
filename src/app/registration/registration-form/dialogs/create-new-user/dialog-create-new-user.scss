@@ -2,17 +2,18 @@
   margin-top: 10px;
 }
 
-.student-form ::ng-deep .mat-form-field {
+.user-form ::ng-deep .mat-form-field {
   width: 210px;
+
   .mat-form-field-flex {
     background-color: transparent;
   }
 
-  @media (max-width: 374px) {
+  @media ( max-width: 374px ) {
     width: 165px;
   }
 
-  @media (max-width: 344px) {
+  @media ( max-width: 344px ) {
     width: 135px;
   }
 }

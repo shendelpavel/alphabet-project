@@ -3,18 +3,15 @@
     <div class="status-form">
       <mat-form-field appearance="fill">
         <mat-label>Select your status</mat-label>
-        <mat-select [(ngModel)]="formVariant">
+        <mat-select [(ngModel)]="userRole" (selectionChange)="setUserRole()">
           <mat-option *ngFor="let status of STATUSES" [value]="status">
             {{ status }}</mat-option
           >
         </mat-select>
       </mat-form-field>
     </div>
-    <div *ngIf="formVariant === 'Parent'" class="parent-form">
-      <app-parent-form></app-parent-form>
-    </div>
-    <div *ngIf="formVariant === 'Student'" class="student-form">
-      <app-student-form></app-student-form>
+    <div *ngIf="userRole">
+      <ap-registration-form></ap-registration-form>
     </div>
   </div>
 </div>

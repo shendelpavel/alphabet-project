@@ -1,13 +1,13 @@
-import { FormGroup } from '@angular/forms';
+import { FormGroup } from "@angular/forms";
 
 export function EmailInUseValidator(
   controlName: string,
   isExistUser: (email: string) => string
 ) {
-  return (formGroup: FormGroup) => {
-    const control = formGroup.controls[controlName];
+  return (formGroup: FormGroup): void => {
+    const control = formGroup.controls[ controlName ];
 
-    if (control.errors && !control.errors['inUse']) {
+    if (control.errors && !control.errors[ "inUse" ]) {
       return;
     }
 

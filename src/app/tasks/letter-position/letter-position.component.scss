@@ -1,0 +1,65 @@
+$cardSize: 100px;
+$cardExpansion: 5px;
+$cardContainerSize: $cardSize + $cardExpansion;
+
+.alphabet {
+  width: 100%;
+  height: 100%;
+}
+
+.alphabet-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  height: $cardContainerSize;
+  width: $cardContainerSize;
+  margin: 10px;
+}
+
+.card {
+  height: $cardSize;
+  width: $cardSize;
+  border-radius: 10px;
+  border: 1px solid #e8e8e8;
+  transition: height 0.2s, width 0.2s;
+}
+
+.letter-image {
+  width: 100%;
+  height: 100%;
+}
+
+.hover-letter {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: $cardContainerSize;
+  width: $cardContainerSize;
+  border-radius: 10px;
+  overflow: hidden;
+  opacity: 0;
+  background-color: #000000;
+  transition: opacity 0.6s;
+}
+
+.card-container:hover {
+  cursor: pointer;
+
+  .card {
+    height: $cardSize + $cardExpansion;
+    width: $cardSize + $cardExpansion;
+    box-shadow: 0 5px 30px 0 #999999;
+  }
+
+  .hover-letter {
+    opacity: 0.1;
+  }
+}

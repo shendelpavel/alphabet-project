@@ -1,0 +1,23 @@
+<div class="task">
+  <div>
+    <div class="task-form">
+      <mat-form-field appearance="fill">
+        <mat-label>Select task</mat-label>
+        <mat-select [(ngModel)]="taskVariant">
+          <mat-option *ngFor="let task of TASKS" [value]="task">
+            {{ task }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="task-container">
+      <div *ngIf="taskVariant === ''">Select Task</div>
+      <div *ngIf="taskVariant === 'first'">
+        <ap-task-letter-position></ap-task-letter-position>
+      </div>
+      <div *ngIf="taskVariant === 'second'">
+        <ap-task-number-of-letters></ap-task-number-of-letters>
+      </div>
+    </div>
+  </div>
+</div>

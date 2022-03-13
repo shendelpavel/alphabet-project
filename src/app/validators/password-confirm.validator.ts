@@ -1,14 +1,14 @@
-import { FormGroup } from '@angular/forms';
+import { FormGroup } from "@angular/forms";
 
 export function PasswordConfirmValidator(
   controlName: string,
   confirmingControlName: string
 ) {
-  return (formGroup: FormGroup) => {
-    const control = formGroup.controls[controlName];
-    const confirmingControl = formGroup.controls[confirmingControlName];
+  return (formGroup: FormGroup): void => {
+    const control = formGroup.controls[ controlName ];
+    const confirmingControl = formGroup.controls[ confirmingControlName ];
 
-    if (confirmingControl.errors && !confirmingControl.errors['notConfirmed']) {
+    if (confirmingControl.errors && !confirmingControl.errors[ "notConfirmed" ]) {
       return;
     }
 

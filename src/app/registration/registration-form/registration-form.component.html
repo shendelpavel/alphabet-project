@@ -1,12 +1,14 @@
 <div class="form-container">
   <div class="basic-form">
     <div class="form-title">
-      <h1>Parent registration form</h1>
+      <h1>
+        You will be registered as a <u>{{ userRole }}</u>
+      </h1>
     </div>
     <mat-stepper #stepper [orientation]="stepperOrientation">
-      <form [formGroup]="parentForm" novalidate>
+      <form [formGroup]="registrationForm" novalidate>
         <mat-step
-          [stepControl]="parentForm.controls['name']"
+          [stepControl]="registrationForm.controls['name']"
           errorMessage="Enter your name."
         >
           <ng-template matStepLabel>Fill out your name</ng-template>
@@ -14,7 +16,12 @@
             <mat-form-field appearance="fill">
               <mat-label>Name</mat-label>
               <input matInput placeholder="First name" formControlName="name" />
-              <mat-error *ngIf="checkControlErrors('name')">
+              <mat-error
+                *ngIf="
+                  registrationForm.controls['name'].invalid &&
+                  registrationForm.controls['name'].touched
+                "
+              >
                 Enter your name
               </mat-error>
             </mat-form-field>
@@ -24,7 +31,7 @@
           </div>
         </mat-step>
         <mat-step
-          [stepControl]="parentForm.controls['lastName']"
+          [stepControl]="registrationForm.controls['lastName']"
           errorMessage="Enter your last name."
         >
           <ng-template matStepLabel>Fill out your last name</ng-template>
@@ -36,7 +43,12 @@
                 placeholder="Last name"
                 formControlName="lastName"
               />
-              <mat-error *ngIf="checkControlErrors('lastName')">
+              <mat-error
+                *ngIf="
+                  registrationForm.controls['lastName'].invalid &&
+                  registrationForm.controls['lastName'].touched
+                "
+              >
                 Enter your last name
               </mat-error>
             </mat-form-field>
@@ -47,7 +59,7 @@
           </div>
         </mat-step>
         <mat-step
-          [stepControl]="parentForm.controls['email']"
+          [stepControl]="registrationForm.controls['email']"
           errorMessage="Incorrect email."
         >
           <ng-template matStepLabel>Fill out your email</ng-template>
@@ -59,7 +71,12 @@
                 placeholder="Ex. email@email.com"
                 formControlName="email"
               />
-              <mat-error *ngIf="checkControlErrors('email')">
+              <mat-error
+                *ngIf="
+                  registrationForm.controls['email'].invalid &&
+                  registrationForm.controls['email'].touched
+                "
+              >
                 Incorrect email or this email's already in use
               </mat-error>
             </mat-form-field>
@@ -70,7 +87,7 @@
           </div>
         </mat-step>
         <mat-step
-          [stepControl]="parentForm.controls['phoneNumber']"
+          [stepControl]="registrationForm.controls['phoneNumber']"
           errorMessage="Incorrect phone number."
         >
           <ng-template matStepLabel>Fill out your phone number</ng-template>
@@ -82,7 +99,12 @@
                 placeholder="Phone number"
                 formControlName="phoneNumber"
               />
-              <mat-error *ngIf="checkControlErrors('phoneNumber')">
+              <mat-error
+                *ngIf="
+                  registrationForm.controls['phoneNumber'].invalid &&
+                  registrationForm.controls['phoneNumber'].touched
+                "
+              >
                 Incorrect phone number
               </mat-error>
             </mat-form-field>
@@ -93,7 +115,7 @@
           </div>
         </mat-step>
         <mat-step
-          [stepControl]="parentForm.controls['confirmPassword']"
+          [stepControl]="registrationForm.controls['confirmPassword']"
           errorMessage="Confirm password."
         >
           <ng-template matStepLabel>Fill out your password</ng-template>
@@ -107,7 +129,12 @@
                   [type]="hidePassword ? 'password' : 'text'"
                   formControlName="password"
                 />
-                <mat-error *ngIf="checkControlErrors('password')">
+                <mat-error
+                  *ngIf="
+                    registrationForm.controls['password'].invalid &&
+                    registrationForm.controls['password'].touched
+                  "
+                >
                   Incorrect password
                 </mat-error>
               </mat-form-field>
@@ -134,7 +161,12 @@
                   [type]="hideConfirmPassword ? 'password' : 'text'"
                   formControlName="confirmPassword"
                 />
-                <mat-error *ngIf="checkControlErrors('confirmPassword')">
+                <mat-error
+                  *ngIf="
+                    registrationForm.controls['confirmPassword'].invalid &&
+                    registrationForm.controls['confirmPassword'].touched
+                  "
+                >
                   Password mismatch
                 </mat-error>
               </mat-form-field>
@@ -158,25 +190,25 @@
           </div>
         </mat-step>
         <mat-step>
-          <ng-template matStepLabel>Add students</ng-template>
+          <ng-template matStepLabel>Add users</ng-template>
           <div class="step-content-margin-top">
-            <h2>You can add students</h2>
-            <div class="new-students">
+            <h2>You can add users</h2>
+            <div>
               <div
-                class="student-list"
-                [class.show-student-list]="newStudentsList.length > 0"
+                class="user-list"
+                [class.show-user-list]="bindingUsersList.length > 0"
               >
-                <mat-chip-list aria-label="added students">
-                  <div class="student-list-overflow">
+                <mat-chip-list aria-label="added users">
+                  <div class="user-list-overflow">
                     <mat-chip
                       *ngFor="
-                        let student of newStudentsList.controls;
+                        let user of bindingUsersList.controls;
                         let i = index
                       "
-                      (click)="editNewStudent(i)"
-                      (removed)="deleteNewStudent(i)"
+                      (click)="addUser(i)"
+                      (removed)="deleteUser(i)"
                     >
-                      {{ student.value["email"] }}
+                      {{ user.value }}
                       <button matChipRemove>
                         <mat-icon>cancel</mat-icon>
                       </button>
@@ -185,37 +217,8 @@
                 </mat-chip-list>
               </div>
               <div>
-                <button mat-button type="button" (click)="addNewStudent()">
-                  Add new student
-                </button>
-              </div>
-            </div>
-            <div class="existing-students">
-              <div
-                class="student-list"
-                [class.show-student-list]="existingStudentsList.length > 0"
-              >
-                <mat-chip-list aria-label="added students">
-                  <div class="student-list-overflow">
-                    <mat-chip
-                      *ngFor="
-                        let student of existingStudentsList.controls;
-                        let i = index
-                      "
-                      (click)="editExistingStudent(i)"
-                      (removed)="deleteExistingStudent(i)"
-                    >
-                      {{ student.value["email"] }}
-                      <button matChipRemove>
-                        <mat-icon>cancel</mat-icon>
-                      </button>
-                    </mat-chip>
-                  </div>
-                </mat-chip-list>
-              </div>
-              <div>
-                <button mat-button type="button" (click)="addExistingStudent()">
-                  Add existing student
+                <button mat-button type="button" (click)="addUser()">
+                  Add user
                 </button>
               </div>
             </div>
@@ -231,7 +234,7 @@
             <div class="done-step-title">
               <h2>
                 {{
-                  parentForm.invalid
+                  registrationForm.invalid
                     ? "Please fill in all required fields"
                     : "You are now done."
                 }}
@@ -249,7 +252,7 @@
               </button>
               <button
                 mat-button
-                [disabled]="parentForm.invalid"
+                [disabled]="registrationForm.invalid"
                 (click)="signUp()"
                 routerLink="/login"
               >

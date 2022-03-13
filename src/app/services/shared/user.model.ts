@@ -1,4 +1,4 @@
-export interface Parent {
+export interface User {
   role: string;
   isLoggedIn: boolean;
   name: string;
@@ -6,17 +6,6 @@ export interface Parent {
   email: string;
   phoneNumber: string;
   password: string;
-  addedNewStudents: object[];
-  addedExistingStudents: string[];
+  bindedUsers: string[];
 }
 
-export interface Student {
-  role: string;
-  isLoggedIn: boolean;
-  name: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
-  password: string;
-  addedParents: string[];
-}

@@ -2,7 +2,7 @@
   <div class="form-title"><h1>Login</h1></div>
   <div class="help" (mouseover)="showTooltip()" (mouseout)="hideTooltip()">
     <mat-icon> help_outline</mat-icon>
-    <my-tooltip *ngIf="isTooltipShown" [tooltipElement]="tooltipElement">
+    <ap-my-tooltip *ngIf="isTooltipShown" [tooltipElement]="tooltipElement">
       <b>Failed to sign in?</b><br />Please make sure that you've entered your
       <b>email</b> and <b>password</b> correctly.
       <ul>
@@ -22,7 +22,7 @@
           </span>
         </li>
       </ul>
-    </my-tooltip>
+    </ap-my-tooltip>
   </div>
   <form [formGroup]="loginForm" novalidate>
     <div class="form-container">

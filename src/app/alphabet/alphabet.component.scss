@@ -16,8 +16,9 @@ $cardContainerSize: $cardSize + $cardExpansion;
   width: 100%;
   text-align: center;
   padding-bottom: 15px;
-  border-bottom: 1px solid rgba(25, 25, 25, 0.1);
+  border-bottom: 1px solid #e8e8e8;
   margin-bottom: 23px;
+
   h1 {
     margin: 0;
   }
@@ -44,7 +45,7 @@ $cardContainerSize: $cardSize + $cardExpansion;
   height: $cardSize;
   width: $cardSize;
   border-radius: 10px;
-  border: 1px solid rgba(25, 25, 25, 0.1);
+  border: 1px solid #e8e8e8;
   transition: height 0.2s, width 0.2s;
 }
 
@@ -55,24 +56,24 @@ $cardContainerSize: $cardSize + $cardExpansion;
 
 .hover-letter {
   position: absolute;
-  top: 0px;
-  left: 0px;
   height: $cardContainerSize;
   width: $cardContainerSize;
   border-radius: 10px;
   overflow: hidden;
   opacity: 0;
-  background-color: black;
+  background-color: #000000;
   transition: opacity 0.6s;
 }
 
 .card-container:hover {
   cursor: pointer;
+
   .card {
     height: $cardSize + $cardExpansion;
     width: $cardSize + $cardExpansion;
-    box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 5px 30px 0 #999999;
   }
+  
   .hover-letter {
     opacity: 0.1;
   }

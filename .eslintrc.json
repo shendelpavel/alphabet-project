@@ -1,0 +1,113 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.eslint.json"
+        ],
+        "createDefaultProgram": false
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:import/recommended"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "ap",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "ap",
+            "style": "kebab-case"
+          }
+        ],
+        "import/no-unresolved": "off",
+        "import/order": [
+          "error",
+          {
+            "newlines-between": "always-and-inside-groups",
+            "groups": ["external", "builtin", "internal", "parent", "sibling", "index", "object", "type"],
+            "pathGroups": [
+              {
+                "group": "external",
+                "pattern": "@angular/**",
+                "position": "before"
+              },
+              {
+                "group": "internal",
+                "pattern": "src/**",
+                "position": "before"
+              }
+            ],
+            "pathGroupsExcludedImportTypes": ["internal"]
+          }
+        ],
+        "sort-imports": ["error", {
+          "ignoreCase": true,
+          "allowSeparatedGroups": true
+      }],
+      "max-len": ["error", {
+        "code": 120,
+        "ignorePattern": "import"
+      }],
+      "max-lines": ["error", {
+        "max": 150
+      }],
+      "semi": ["error", "always"],
+      "comma-dangle": ["error", "never"],
+      "quotes": ["error", "double", {
+        "avoidEscape": true
+      }],
+      "keyword-spacing": ["error"],
+      "array-bracket-spacing": ["error", "always"],
+      "object-curly-spacing": ["error", "always"],
+      "computed-property-spacing": ["error", "always"],
+      "curly": ["error"],
+      "prefer-const": ["error"],
+      "no-undefined": ["error"],
+      "no-empty-function": ["error", { 
+        "allow": ["constructors"] 
+      }],
+      "arrow-parens": ["error", "as-needed"],
+      "@typescript-eslint/member-ordering": ["error"],
+      "@typescript-eslint/explicit-function-return-type": ["error"],
+      "@typescript-eslint/explicit-member-accessibility": ["error", { 
+        "overrides":  {
+          "constructors": "no-public"
+        }
+      }],
+      "@typescript-eslint/prefer-readonly": ["error"],
+      "@typescript-eslint/no-explicit-any": ["error"]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {
+        "max-len": ["error", {
+          "code": 120,
+          "ignorePattern": "import"
+        }]
+      }
+    }
+  ]
+}

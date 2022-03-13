@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable } from "@angular/core";
 
-@Injectable({ providedIn: 'root' })
+import { BehaviorSubject } from "rxjs";
+
+@Injectable({ providedIn: "root" })
 export class TooltipService {
-  private isMouseover = new BehaviorSubject(false);
-  currentIsMouseover$ = this.isMouseover.asObservable();
+  public isMouseover = new BehaviorSubject(false);
+  public currentIsMouseover$ = this.isMouseover.asObservable();
 
   public setTooltipStatus(isMouseover: boolean): void {
     this.isMouseover.next(isMouseover);
